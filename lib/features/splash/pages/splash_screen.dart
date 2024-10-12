@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:petetco/features/home/pages/home_screen.dart';
+import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
+import 'package:petetco/features/splash/widgets/picture_animation.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -14,14 +16,14 @@ class _SplashScreenState extends State<SplashScreen>
 
       @override
   void initState() {
+    super.initState();
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
-
-    // Future.delayed(const Duration(seconds: 2),(){
-    //   Navigator.of(context).pushReplacement(MaterialPageRoute(
-    //     builder: (_) => const HomeScreen()
-    //     ));
-    // });
+    Future.delayed(const Duration(seconds: 3),(){
+      Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (_) => const OnBoardingScreen()
+        ));
+    });
   
   
   }
@@ -35,25 +37,29 @@ class _SplashScreenState extends State<SplashScreen>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          gradient: LinearGradient(colors: [
-            Colors.white,
-            Colors.deepOrange.shade300],
-            begin:Alignment.topRight,
-            end: Alignment.bottomLeft),
+      body: Stack(
+        children: [Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            gradient: LinearGradient(colors: [
+              Colors.white,
+              const Color.fromARGB(255, 86, 177, 115)],
+              begin:Alignment.topRight,
+              end: Alignment.bottomLeft),
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(              
+                width: 150,
+                height: 150,
+                //child: const Image(image: AssetImage('assets/icons/logo.png'),fit: BoxFit.contain,),
+              )
+            ],
+          ),
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Container(              
-              width: 110,
-              height: 110,
-              child: const Image(image: AssetImage('assets/icons/logo.png'),fit: BoxFit.contain,),
-            )
-          ],
-        ),
+        PictureAnimation()
+        ],
       ),
     );
   }

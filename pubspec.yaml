@@ -13,14 +13,27 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   cupertino_icons: ^1.0.8
+  flutter_screenutil: ^5.9.3
+  smooth_page_indicator: ^1.2.0+3
+  gap: ^3.0.1
+  get:
+  flutter_vector_icons: ^2.0.0
+
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
   flutter_lints: ^4.0.0
+  flutter_native_splash: ^2.2.19
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/icons/logo.png  # Optional: path to the splash screen logo
+  android: true
+  ios: true
+  fullscreen: true     # Optional: make the splash screen fullscreen
 
 
 flutter:
