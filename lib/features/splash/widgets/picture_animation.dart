@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 
 class PictureAnimation extends StatefulWidget {
+  const PictureAnimation({super.key});
+
   @override
+  // ignore: library_private_types_in_public_api
   _PictureAnimationState createState() => _PictureAnimationState();
 }
 
@@ -52,8 +55,8 @@ class _PictureAnimationState extends State<PictureAnimation> with SingleTickerPr
             right: 0,
             child: SlideTransition(
               position: Tween<Offset>(
-                begin: Offset(0, 1), // Start from bottom
-                end: Offset(0, 0),   // End at the original position
+                begin: const Offset(0, 1), // Start from bottom
+                end: const Offset(0, 0),   // End at the original position
               ).animate(_controller),
               child: Image.asset(
                 'assets/images/splash1.png', // Example image

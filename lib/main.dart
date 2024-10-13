@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/features/splash/pages/splash_screen.dart';
 
 void main() {
@@ -26,8 +27,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Petet Co',
       theme: ThemeData.light(
-        useMaterial3: true,
-      ),
+        useMaterial3: true,      
+      ).copyWith(primaryColor:primary),
       darkTheme: ThemeData.light(),
       themeMode: ThemeMode.light,
       home: const SplashScreen(),
