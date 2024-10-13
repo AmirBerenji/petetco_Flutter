@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class AppLayout{
-  static dynamic _size;
+  static dynamic _size ;
   static getSize(BuildContext context){
      _size = MediaQuery.of(context).size;
      return _size;

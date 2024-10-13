@@ -1,13 +1,34 @@
 import 'package:flutter/material.dart';
 
-Color primary = const Color(0xFF687daf);
+Color primary = const Color(0xFFeeedf2);
 
 class Styles{
   static Color primaryColor = primary;
   static Color textColor = const Color(0xFF3b3b3b);
-  static Color bgColor = const Color(0xFFeeedf2);
-  static Color orangeColor = const Color(0xFFf37b67);
-  static Color kakiColor = const Color(0xFFd2bdb6);
+  static Color bgColor = const Color(0xFFeeedf2);  
+  static Color greenButton = green900;
+  static Color orangeButton = orange900;
+
+  static Color green900 = const Color(0xFF157759); 
+
+
+  static Color grey = const Color(0xFF212121);
+  static Color grey900 = const Color(0xFF424242);
+  static Color grey800 = const Color(0xFF616161);
+  static Color grey700 = const Color(0xFF757575);
+  static Color grey600 = const Color(0xFF9e9e9e);
+  static Color grey500 = const Color(0xFFbdbdbd);
+  static Color grey400 = const Color(0xFFe0e0e0);
+  static Color grey300 = const Color(0xFFeeeeee);
+  static Color grey200 = const Color(0xFFf5f5f5);
+  static Color grey100 = const Color(0xFFfafafa);
+
+
+  static Color orange900 = const Color(0xFFfd5602);
+  static Color orange800 = const Color(0xFFfe6e00);
+
+
+
 
   static TextStyle textStyle = TextStyle(fontSize: 13,color: textColor,fontWeight: FontWeight.w500);
   static TextStyle headLineStyle1 = TextStyle(fontSize: 26,color: textColor,fontWeight: FontWeight.bold);

@@ -1,0 +1,65 @@
+// To parse this JSON data, do
+//
+//     final userLogin = userLoginFromJson(jsonString);
+
+import 'dart:convert';
+
+UserLogin userLoginFromJson(String str) => UserLogin.fromJson(json.decode(str));
+
+String userLoginToJson(UserLogin data) => json.encode(data.toJson());
+
+class UserLogin {
+    Data? data;
+    String? message;
+
+    UserLogin({
+        this.data,
+        this.message,
+    });
+
+    factory UserLogin.fromJson(Map<String, dynamic> json) => UserLogin(
+        data: Data.fromJson(json["data"]),
+        message: json["message"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "data": data!.toJson(),
+        "message": message,
+    };
+}
+
+class Data {
+    int? id;
+    String? name;
+    String? avatar;
+    String? email;
+    bool? emailVerified;
+    String? token;
+
+    Data({
+        this.id,
+        this.name,
+        this.avatar,
+        this.email,
+        this.emailVerified,
+        this.token,
+    });
+
+    factory Data.fromJson(Map<String, dynamic> json) => Data(
+        id: json["id"],
+        name: json["name"],
+        avatar: json["avatar"],
+        email: json["email"],
+        emailVerified: json["email_verified"],
+        token: json["token"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "avatar": avatar,
+        "email": email,
+        "email_verified": emailVerified,
+        "token": token,
+    };
+}

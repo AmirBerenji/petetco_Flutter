@@ -3,7 +3,9 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:gap/gap.dart';
 import 'package:petetco/commons/utils/app_layout.dart';
 import 'package:petetco/commons/utils/app_style.dart';
+import 'package:petetco/features/home/pages/home_screen.dart';
 import 'package:petetco/features/onboarding/widgets/page_one.dart';
+import 'package:petetco/features/onboarding/widgets/page_three.dart';
 import 'package:petetco/features/onboarding/widgets/page_two.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -33,6 +35,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
             children: const [
               PageOne(),
               PageTwo(),
+              PageThree()
             ],),
             Align(
               alignment: Alignment.bottomCenter,
@@ -45,19 +48,24 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     children: [
                       GestureDetector(
                         onTap: (){
-                          print("Hello");
-                          pageController.nextPage(duration: const Duration(microseconds: 600), 
+                          pageController.nextPage(duration: const Duration(milliseconds: 600), 
                           curve: Curves.ease);
                         },
-                        child: const Icon(Ionicons.chevron_forward_circle,
+                        child: Icon(Ionicons.chevron_forward_circle,
                         size: 30,
-                        color: Colors.red,),
+                        color: Styles.orangeButton,),
                       ),
-                      Gap(AppLayout.getHeight(5)),
-                      Text(
+                      Gap(AppLayout.getHeight(10)),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+                        },
+                        child: Text(
                         "Skip",
-                        style: Styles.headLineStyle4,
-                      )
+                        style: Styles.headLineStyle3.copyWith(color: Styles.grey100),
+                          ),
+                      ),
+                      
                     ],
                   ),
                   GestureDetector(
@@ -66,17 +74,19 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                           curve: Curves.ease);
                     },
                     child: SmoothPageIndicator(
+
                       controller: pageController, 
-                      count: 2,
-                      effect: const WormEffect(
-                        dotHeight: 12,
-                        dotWidth: 16,
+                      count: 3,
+                      effect: WormEffect(
+                        activeDotColor: Styles.orangeButton,
+                        dotHeight: 15,
+                        dotWidth: 15,
                         spacing: 10,
-                      ),),
+                      ),
+                      ),
                   )
                 ],
               ),
-              
               ),
           ),
         ],

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:petetco/features/home/pages/home_screen.dart';
+import 'package:gap/gap.dart';
+import 'package:petetco/commons/utils/app_layout.dart';
+import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
 import 'package:petetco/features/splash/widgets/picture_animation.dart';
 
@@ -17,7 +18,7 @@ class _SplashScreenState extends State<SplashScreen>
       @override
   void initState() {
     super.initState();
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
 
     Future.delayed(const Duration(seconds: 3),(){
       Navigator.of(context).pushReplacement(MaterialPageRoute(
@@ -30,34 +31,46 @@ class _SplashScreenState extends State<SplashScreen>
 
 @override
   void dispose() {
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,overlays: SystemUiOverlay.values);
+   // SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,overlays: SystemUiOverlay.values);
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final size = AppLayout.getSize(context);
     return Scaffold(
       body: Stack(
-        children: [Container(
-          width: double.infinity,
-          decoration: BoxDecoration(
-            gradient: LinearGradient(colors: [
-              Colors.white,
-              const Color.fromARGB(255, 86, 177, 115)],
-              begin:Alignment.topRight,
-              end: Alignment.bottomLeft),
-          ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+         Container(
+          width: 500,
+          
+          child:Column(
             children: [
-              Container(              
-                width: 150,
-                height: 150,
-                //child: const Image(image: AssetImage('assets/icons/logo.png'),fit: BoxFit.contain,),
-              )
+              Container(
+                width:500,
+                height: 530,
+                decoration: BoxDecoration(
+                color: Styles.green900,
+                borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(150)),
+                ),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text("Welcome",style: Styles.headLineStyle1.copyWith(color: Styles.grey100,fontSize: 50)),
+                    Gap(10),
+                    Text("to",style: Styles.headLineStyle1.copyWith(color: Styles.grey100,fontSize: 40)),
+                    Gap(10),
+                    Text("PETET CO",style: Styles.headLineStyle1.copyWith(color: Styles.grey100,fontSize: 60)),
+                  ],
+                ),
+              ),
+              
             ],
-          ),
-        ),
+          ) 
+          ,
+         ),
+         
+       
         PictureAnimation()
         ],
       ),
