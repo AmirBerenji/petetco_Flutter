@@ -1,0 +1,63 @@
+import 'package:flutter/material.dart';
+import 'package:petetco/commons/utils/app_layout.dart';
+import 'package:petetco/commons/utils/app_style.dart';
+
+class CustomTextField extends StatelessWidget {
+  const CustomTextField({super.key, this.keyboardType, required this.hintText, this.suffixIcon, this.prefixIcon, this.hintStyle, required this.controller, this.onChanged, this.obscureText});
+  
+  final TextInputType? keyboardType;
+  final String hintText; 
+  final Widget? suffixIcon;
+  final Widget? prefixIcon;
+  final TextStyle? hintStyle;
+  final TextEditingController controller;
+  final void Function(String)? onChanged;
+  final bool? obscureText; 
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: AppLayout.getScreenWidth()*0.9,
+      decoration: BoxDecoration(
+        color: Styles.bgColor,
+        borderRadius: BorderRadius.all(Radius.circular(Styles.radiousSize)),
+      ),
+      child: TextFormField(
+        obscureText: obscureText ?? false,
+        keyboardType: keyboardType,
+        controller: controller,
+        cursorHeight: 25,
+        onChanged: onChanged,
+        style: Styles.headLineStyle3.copyWith(color: Styles.grey900),
+        decoration: InputDecoration(
+          hintText: hintText,
+          suffixIcon: suffixIcon,
+          prefixIcon: prefixIcon,
+          suffixIconColor: Styles.grey700,
+          hintStyle: hintStyle,
+          labelText: hintText,
+          errorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(Styles.radiousSize)),
+            borderSide: BorderSide(color: Styles.errorRed,width: 1)
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: const BorderRadius.all(Radius.circular(Styles.radiousSize)),
+            borderSide: BorderSide(color: Styles.grey600 ,width: 1)
+          ),
+          focusedErrorBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(Styles.radiousSize)),
+            borderSide: BorderSide(color: Styles.errorRed,width: 1)
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(Styles.radiousSize)),
+            borderSide: BorderSide(color: Styles.grey400,width: 1)
+          ),
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.all(Radius.circular(Styles.radiousSize)),
+            borderSide: BorderSide(color: Styles.grey500,width: 1)
+          )    
+        ),
+      ),
+    );
+  }
+}
