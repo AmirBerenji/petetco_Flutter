@@ -3,7 +3,7 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:gap/gap.dart';
 import 'package:petetco/commons/utils/app_layout.dart';
 import 'package:petetco/commons/utils/app_style.dart';
-import 'package:petetco/features/home/pages/home_screen.dart';
+import 'package:petetco/features/auth/pages/login_screen.dart';
 import 'package:petetco/features/onboarding/widgets/page_one.dart';
 import 'package:petetco/features/onboarding/widgets/page_three.dart';
 import 'package:petetco/features/onboarding/widgets/page_two.dart';
@@ -58,7 +58,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                       Gap(AppLayout.getHeight(10)),
                       GestureDetector(
                         onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => const HomeScreen()));
+                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
                         },
                         child: Text(
                         "Skip",

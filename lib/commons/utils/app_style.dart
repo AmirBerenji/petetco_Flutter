@@ -6,6 +6,7 @@ class Styles{
   static Color primaryColor = primary;
   static Color textColor = const Color(0xFF3b3b3b);
   static Color bgColor = const Color(0xFFeeedf2);  
+  static Color errorRed = Colors.red.shade700;
   static Color greenButton = green900;
   static Color orangeButton = orange900;
 
@@ -35,6 +36,9 @@ class Styles{
   static TextStyle headLineStyle2 = TextStyle(fontSize: 21,color: textColor,fontWeight: FontWeight.bold);
   static TextStyle headLineStyle3 = TextStyle(fontSize: 17,color: Colors.grey.shade500,fontWeight: FontWeight.w500);
   static TextStyle headLineStyle4 = TextStyle(fontSize: 14,color: Colors.grey.shade500,fontWeight: FontWeight.w300);
+
+
+  static const double radiousSize = 12;
 
 }
 
