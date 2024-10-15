@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/features/splash/pages/splash_screen.dart';
 
@@ -10,7 +11,9 @@ void main() {
     DeviceOrientation.portraitUp,
 
   ]).then((_){
-    runApp(const MyApp());
+
+    runApp(const ProviderScope(child: MyApp()));
+  
   }
 
   );
