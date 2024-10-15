@@ -20,9 +20,10 @@ class CustomTextField extends StatelessWidget {
       width: AppLayout.getScreenWidth()*0.9,
       decoration: BoxDecoration(
         color: Styles.bgColor,
-        borderRadius: BorderRadius.all(Radius.circular(Styles.radiousSize)),
+        borderRadius: const BorderRadius.all(Radius.circular(Styles.radiousSize)),
       ),
-      child: TextFormField(
+      child: 
+      TextFormField(
         obscureText: obscureText ?? false,
         keyboardType: keyboardType,
         controller: controller,
@@ -37,7 +38,7 @@ class CustomTextField extends StatelessWidget {
           hintStyle: hintStyle,
           labelText: hintText,
           errorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(Styles.radiousSize)),
+            borderRadius: const BorderRadius.all(Radius.circular(Styles.radiousSize)),
             borderSide: BorderSide(color: Styles.errorRed,width: 1)
           ),
           focusedBorder: OutlineInputBorder(
@@ -45,15 +46,15 @@ class CustomTextField extends StatelessWidget {
             borderSide: BorderSide(color: Styles.grey600 ,width: 1)
           ),
           focusedErrorBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(Styles.radiousSize)),
+            borderRadius: const BorderRadius.all(Radius.circular(Styles.radiousSize)),
             borderSide: BorderSide(color: Styles.errorRed,width: 1)
           ),
           disabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(Styles.radiousSize)),
+            borderRadius: const BorderRadius.all(Radius.circular(Styles.radiousSize)),
             borderSide: BorderSide(color: Styles.grey400,width: 1)
           ),
           enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(Styles.radiousSize)),
+            borderRadius: const BorderRadius.all(Radius.circular(Styles.radiousSize)),
             borderSide: BorderSide(color: Styles.grey500,width: 1)
           )    
         ),

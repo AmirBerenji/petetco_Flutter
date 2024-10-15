@@ -1,28 +1,32 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import 'package:petetco/commons/utils/app_layout.dart';
+import 'package:petetco/commons/models/login_model.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/custom_btn.dart';
 import 'package:petetco/commons/widget/custome_textfield.dart';
+import 'package:petetco/features/auth/controllers/login_provider.dart';
+import 'package:petetco/features/home/pages/home_screen.dart';
 
-class LoginScreen extends StatefulWidget {
+
+class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginScreen> createState() => _LoginScreen();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _LoginScreen extends ConsumerState<LoginScreen> {
   
-   final TextEditingController user = TextEditingController();
-  final TextEditingController password = TextEditingController();
-  
+
+  final TextEditingController _user = TextEditingController();
+  final TextEditingController _password = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
-  final size = AppLayout.getSize(context);
+  
     return Scaffold(
       backgroundColor: Styles.bgColor,
       body: SingleChildScrollView(
@@ -34,8 +38,8 @@ class _LoginScreenState extends State<LoginScreen> {
           
             children: [
               SizedBox(
-                width:AppLayout.getScreenWidth(),
-                height: AppLayout.getScreenHeight() *0.5,
+                width:700,
+                height: 450,
                 child: 
                 Padding(
                   padding: const EdgeInsets.only(top:30),
@@ -49,37 +53,51 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
           
               Container(
-                width:AppLayout.getScreenWidth(),
-                height: AppLayout.getScreenHeight() *0.5,
+                width:700,
+                height: 400,
                 decoration: BoxDecoration(
                   color: Styles.bgColor,
                   borderRadius: const BorderRadius.only(topLeft: Radius.circular(40),topRight: Radius.circular(40)),
                   border: Border.all(width: 0.5, color: Styles.grey500),
                 ),
-                child: Padding(padding: EdgeInsets.only(top: AppLayout.getHeight(30)),
+                child: Padding(padding: const EdgeInsets.only(top: 30),
                 child: Column(
                   children: [
                     Text(
                       "Login",
                       style: Styles.headLineStyle1,
                     ),
-                    Gap(AppLayout.getHeight(30)),  
+                    const Gap(30),  
                     CustomTextField(hintText: "UserName/Email",
-                      controller: user,
+                      controller: _user,
                       hintStyle: TextStyle(color: Styles.grey600),
                       keyboardType: TextInputType.emailAddress,
-                      prefixIcon: Icon(Ionicons.person_outline),),
-                    Gap(AppLayout.getHeight(20)),
+                      suffixIcon: const Icon(Ionicons.person_outline),),
+                    const Gap(20),
                     CustomTextField(hintText: "Password",
-                      controller: password,
+                      controller: _password,
                       obscureText: true,
                       hintStyle: TextStyle(color: Styles.grey600),
                       keyboardType: TextInputType.visiblePassword,
-                      prefixIcon: Icon(Icons.key_rounded)),
-                    Gap(AppLayout.getHeight(20)),
+                      suffixIcon: const Icon(Icons.lock)),
+                    const Gap(20),
                     CustomButton(
-                      width: AppLayout.getScreenWidth() * 0.9, 
-                      height: AppLayout.getHeight(60), 
+                      onTap: () async {
+                         if(_user.text.isNotEmpty && _password.text.isNotEmpty)
+                         {
+                           var loginModel = Login(email:_user.text ,password: _password.text);
+                           var userInfo = await ref.read(loginStateProvider.notifier).login(loginModel);
+                           final xx = userInfo.data?.name;
+                           if(userInfo.data?.token != "")
+                           {
+                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen(
+                              userName: userInfo.data?.name ?? "Testtttttttt" 
+                            )));
+                           };
+                         }
+                      },
+                      width: 380, 
+                      height: 50, 
                       borderColor: Styles.green900,
                       color: Styles.green900,
                       text: Text(
@@ -87,7 +105,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: Styles.headLineStyle2.copyWith(color: Styles.grey100),
                         ) 
                       ),
-                    Gap(AppLayout.getHeight(30)),
+                    
+                    const Gap(30),
+                    
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: Row(
