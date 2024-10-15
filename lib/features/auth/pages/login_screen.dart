@@ -1,11 +1,14 @@
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:petetco/commons/models/login_model.dart';
+import 'package:petetco/commons/models/userlogin_model.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/custom_btn.dart';
+import 'package:petetco/commons/widget/custome_dialog.dart';
 import 'package:petetco/commons/widget/custome_textfield.dart';
 import 'package:petetco/features/auth/controllers/login_provider.dart';
 import 'package:petetco/features/home/pages/home_screen.dart';
@@ -72,14 +75,17 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                       controller: _user,
                       hintStyle: TextStyle(color: Styles.grey600),
                       keyboardType: TextInputType.emailAddress,
-                      suffixIcon: const Icon(Ionicons.person_outline),),
+                      suffixIcon: const Icon(Ionicons.person_outline),
+                      textInputAction: TextInputAction.next,),
                     const Gap(20),
                     CustomTextField(hintText: "Password",
                       controller: _password,
                       obscureText: true,
                       hintStyle: TextStyle(color: Styles.grey600),
                       keyboardType: TextInputType.visiblePassword,
-                      suffixIcon: const Icon(Icons.lock)),
+                      suffixIcon: const Icon(Icons.lock),
+                      textInputAction: TextInputAction.done
+                      ),
                     const Gap(20),
                     CustomButton(
                       onTap: () async {
@@ -87,13 +93,26 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                          {
                            var loginModel = Login(email:_user.text ,password: _password.text);
                            var userInfo = await ref.read(loginStateProvider.notifier).login(loginModel);
-                           final xx = userInfo.data?.name;
-                           if(userInfo.data?.token != "")
+
+                           if(userInfo.data?.token != null)
                            {
-                            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomeScreen(
-                              userName: userInfo.data?.name ?? "Testtttttttt" 
-                            )));
-                           };
+                            Navigator.pushReplacement(
+                              context, 
+                              MaterialPageRoute(
+                                builder: (context) => HomeScreen(
+                                userName: userInfo.data?.name ?? "" 
+                                )
+                              )
+                            );
+                           }
+                            else
+                            {  
+                              CustomAwesomeDialog(
+                                context, 
+                                userInfo.message.toString(),
+                                DialogType.warning
+                                ).show();
+                            }
                          }
                       },
                       width: 380, 
@@ -125,7 +144,7 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                               "Create account",
                               style: Styles.headLineStyle3,),
                           ),
-                      
+                          
                         ],
                       ),
                     )
@@ -140,4 +159,6 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
       ),
     );
   }
+
+  
 }

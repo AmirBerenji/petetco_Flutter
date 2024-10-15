@@ -3,7 +3,7 @@ import 'package:petetco/commons/utils/app_layout.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({super.key, this.keyboardType, required this.hintText, this.suffixIcon, this.prefixIcon, this.hintStyle, required this.controller, this.onChanged, this.obscureText});
+  const CustomTextField({super.key, this.keyboardType, required this.hintText, this.suffixIcon, this.prefixIcon, this.hintStyle, required this.controller, this.onChanged, this.obscureText, this.textInputAction});
   
   final TextInputType? keyboardType;
   final String hintText; 
@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController controller;
   final void Function(String)? onChanged;
   final bool? obscureText; 
+  final TextInputAction? textInputAction;
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +25,7 @@ class CustomTextField extends StatelessWidget {
       ),
       child: 
       TextFormField(
+        textInputAction: textInputAction,
         obscureText: obscureText ?? false,
         keyboardType: keyboardType,
         controller: controller,
