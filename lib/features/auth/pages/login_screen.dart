@@ -5,7 +5,6 @@ import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:petetco/commons/models/login_model.dart';
-import 'package:petetco/commons/models/userlogin_model.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/custom_btn.dart';
 import 'package:petetco/commons/widget/custome_dialog.dart';
@@ -96,6 +95,13 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
 
                            if(userInfo.data?.token != null)
                            {
+
+                            // SharedPreferences prefs = await SharedPreferences.getInstance();
+                            // await prefs.setString('token', userInfo.data!.token.toString());
+
+
+
+
                             Navigator.pushReplacement(
                               context, 
                               MaterialPageRoute(
@@ -113,6 +119,9 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                                 DialogType.warning
                                 ).show();
                             }
+                         }else
+                         {
+                           CustomAwesomeDialog(context, "Please fill all data", DialogType.error).show();
                          }
                       },
                       width: 380, 
