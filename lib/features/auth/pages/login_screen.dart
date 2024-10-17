@@ -10,6 +10,7 @@ import 'package:petetco/commons/widget/custom_btn.dart';
 import 'package:petetco/commons/widget/custome_dialog.dart';
 import 'package:petetco/commons/widget/custome_textfield.dart';
 import 'package:petetco/features/auth/controllers/login_provider.dart';
+import 'package:petetco/features/auth/pages/register_screen.dart';
 import 'package:petetco/features/home/pages/home_screen.dart';
 
 
@@ -22,7 +23,7 @@ class LoginScreen extends ConsumerStatefulWidget {
 
 class _LoginScreen extends ConsumerState<LoginScreen> {
   
-
+ 
   final TextEditingController _user = TextEditingController();
   final TextEditingController _password = TextEditingController();
 
@@ -148,7 +149,9 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                               style: Styles.headLineStyle3,),
                           ),
                           GestureDetector(
-                            onTap: (){},
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterScreen()));
+                            },
                             child: Text(
                               "Create account",
                               style: Styles.headLineStyle3,),
@@ -161,7 +164,6 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                 ),
                 ),
               ),
-          
             ],
           ),
         ),
