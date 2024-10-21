@@ -1,6 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:petetco/commons/models/login_model.dart';
 import 'package:petetco/commons/models/usercreate_model.dart';
+import 'package:petetco/commons/models/userinfo_model.dart';
 import 'package:petetco/commons/models/userlogin_model.dart';
 import 'dart:convert';
 
@@ -25,20 +26,18 @@ class AuthService extends BasicService {
 
     var user = new UserLogin();
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      var user  = userLoginFromJson(response.body); 
+      var user  = userLoginFromJson(response.body);
+
+      saveToken(user.data!.token.toString());
+
       return user; 
     }else
     {
-      var xx = jsonDecode(response.body);
-      user.message = xx["message"]; 
+      var errorMessage= jsonDecode(response.body);
+      user.message = errorMessage["message"]; 
       return user;
     }
   }
-
-
-
-
 
    Future<UserLogin> register(UserCreate userCreate) async {
     final url = Uri.parse('$baseUrl/register');
@@ -58,8 +57,11 @@ class AuthService extends BasicService {
 
     var user = new UserLogin();
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
+      
+      
       var user  = userLoginFromJson(response.body); 
+      saveToken(user.data!.token.toString());
+
       return user; 
     }else
     {
@@ -68,4 +70,31 @@ class AuthService extends BasicService {
       return user;
     }
   }
+  
+  Future<UserInfo> userInfo() async {
+    var token = await getToken();
+    
+    final url = Uri.parse('$baseUrl/profile');
+
+    final response = await http.get(
+      url,
+      headers: <String, String>{
+        'Authorization': 'Bearer $token',
+      }
+      
+    );
+
+    var user = UserInfo(); 
+    if (response.statusCode == 200) {
+      var user  = userInfoFromJson(response.body);
+
+      return user; 
+    }else
+    {
+      var errorMessage= jsonDecode(response.body);
+      user.message = errorMessage["message"]; 
+      return user;
+    }
+  }
+
 }

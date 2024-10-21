@@ -97,12 +97,6 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                            if(userInfo.data?.token != null)
                            {
 
-                            // SharedPreferences prefs = await SharedPreferences.getInstance();
-                            // await prefs.setString('token', userInfo.data!.token.toString());
-
-
-
-
                             Navigator.pushReplacement(
                               context, 
                               MaterialPageRoute(
@@ -111,6 +105,8 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                                 )
                               )
                             );
+
+                            
                            }
                             else
                             {  

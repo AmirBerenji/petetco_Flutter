@@ -41,6 +41,8 @@ class _PictureAnimationState extends State<PictureAnimation> with SingleTickerPr
     _controller.dispose(); // Dispose the controller when done
     super.dispose();
   }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
