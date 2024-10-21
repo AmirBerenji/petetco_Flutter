@@ -2,7 +2,6 @@
 //
 //     final userCreate = userCreateFromJson(jsonString);
 
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 UserCreate userCreateFromJson(String str) => UserCreate.fromJson(json.decode(str));

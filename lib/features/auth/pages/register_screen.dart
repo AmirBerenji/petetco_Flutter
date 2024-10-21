@@ -6,15 +6,12 @@ import 'package:flutter_vector_icons/flutter_vector_icons.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:lottie/lottie.dart';
-import 'package:petetco/commons/models/login_model.dart';
 import 'package:petetco/commons/models/usercreate_model.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/custom_btn.dart';
 import 'package:petetco/commons/widget/custome_dialog.dart';
 import 'package:petetco/commons/widget/custome_textfield.dart';
-import 'package:petetco/features/auth/controllers/login_provider.dart';
 import 'package:petetco/features/auth/pages/login_screen.dart';
-import 'package:petetco/features/home/pages/home_screen.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
