@@ -1,29 +1,56 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:petetco/commons/helper/shared_stroge.dart';
 import 'package:petetco/commons/utils/app_layout.dart';
 import 'package:petetco/commons/utils/app_style.dart';
+import 'package:petetco/features/auth/controllers/userinfo_provider.dart';
+import 'package:petetco/features/home/pages/home_screen.dart';
 import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
 import 'package:petetco/features/splash/widgets/picture_animation.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
 
   @override
-  State<SplashScreen> createState() => _SplashScreenState();
+  ConsumerState<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> 
+class _SplashScreenState extends ConsumerState<SplashScreen> 
     with SingleTickerProviderStateMixin{
 
       @override
   void initState() {
     super.initState();
     //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
+    SharedStorage storage  = new SharedStorage();
+    Future.delayed(const Duration(seconds: 3),() async {
 
-    Future.delayed(const Duration(seconds: 3),(){
-      Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (_) => const OnBoardingScreen()
-        ));
+      
+        
+        var token = await storage.getValue('token');
+
+        if(token == null ) { 
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (_) => const OnBoardingScreen()
+          ));
+          return;
+        }
+        
+        var user = await ref.read(userInfoStateProvider.notifier).userInfo();
+
+        if(user.data == null)
+        {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (_) => const OnBoardingScreen()
+          ));
+          
+        }else{
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (_) => HomeScreen(userName: user.data!.name??""  )
+          ));
+        }
+
     });
   
   
@@ -37,7 +64,9 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
-    final size = AppLayout.getSize(context);
+    
+    AppLayout.getSize(context);
+    
     return Scaffold(
       body: Stack(
         children: [
