@@ -29,34 +29,34 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     SharedStorage storage  = new SharedStorage();
     Future.delayed(const Duration(seconds: 3),() async {
 
-        // var token = await storage.getValue('token');
+        var token = await storage.getValue('token');
 
-        // if(token == null ) { 
-        //   Navigator.of(context).pushReplacement(MaterialPageRoute(
-        //     builder: (_) => const OnBoardingScreen()
-        //   ));
-        //   return;
-        // }
+        if(token == null ) { 
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (_) => const OnBoardingScreen()
+          ));
+          return;
+        }
         
-        // var user = await ref.read(userInfoStateProvider.notifier).userInfo();
+        var user = await ref.read(userInfoStateProvider.notifier).userInfo();
 
-        // if(user.data == null)
-        // {
-        //   Navigator.of(context).pushReplacement(MaterialPageRoute(
-        //     builder: (_) => const OnBoardingScreen()
-        //   ));
+        if(user.data == null)
+        {
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (_) => const OnBoardingScreen()
+          ));
           
-        // }else{
-        //   Navigator.of(context).pushReplacement(MaterialPageRoute(
-        //     builder: (_) => const HomeScreen()
-        //   ));
-        // }
-
-
-
-        Navigator.of(context).pushReplacement(MaterialPageRoute(
+        }else{
+          Navigator.of(context).pushReplacement(MaterialPageRoute(
             builder: (_) => const BottomBar()
           ));
+        }
+
+
+
+        // Navigator.of(context).pushReplacement(MaterialPageRoute(
+        //     builder: (_) => const BottomBar()
+        //   ));
 
     });
   

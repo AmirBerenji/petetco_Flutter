@@ -25,7 +25,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
     super.dispose();
   }
   Widget build(BuildContext context) {
-    final size = AppLayout.getSize(context);
+    AppLayout.getSize(context);
     return  Scaffold(
       body:Stack(
         children: [

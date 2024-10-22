@@ -25,6 +25,7 @@ dependencies:
   http: ^1.2.2
   awesome_dialog: ^3.2.1
   shared_preferences:
+  flutter_spinkit:
  
 
   
