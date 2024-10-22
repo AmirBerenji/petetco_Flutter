@@ -7,14 +7,13 @@ part 'userinfo_provider.g.dart';
 @riverpod
 class UserInfoState extends _$UserInfoState {
   @override 
-  String build(){
-    return "";
+  UserInfo build(){
+    
+    return new UserInfo();
   }
 
-  Future<UserInfo> userInfo() async{
-    
+  Future<UserInfo> userInfo() async{  
     var user = await AuthService().userInfo();
-
     return user;
   }
 

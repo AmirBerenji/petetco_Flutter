@@ -11,6 +11,7 @@ import 'package:petetco/commons/widget/custome_dialog.dart';
 import 'package:petetco/commons/widget/custome_textfield.dart';
 import 'package:petetco/features/auth/controllers/login_provider.dart';
 import 'package:petetco/features/auth/pages/register_screen.dart';
+import 'package:petetco/features/bottom_bar.dart';
 import 'package:petetco/features/home/pages/home_screen.dart';
 
 
@@ -100,9 +101,7 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                             Navigator.pushReplacement(
                               context, 
                               MaterialPageRoute(
-                                builder: (context) => HomeScreen(
-                                userName: userInfo.data?.name ?? "" 
-                                )
+                                builder: (context) => const BottomBar()
                               )
                             );
 
