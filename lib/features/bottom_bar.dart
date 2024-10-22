@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/features/home/pages/home_screen.dart';
 
 class BottomBar extends StatefulWidget {
@@ -13,7 +14,7 @@ class _BottomBarState extends State<BottomBar> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    const  Text("Tickets"),
+    const Text("Tickets"),
     const Text("Tickets"),
     const Text("Profile")
   ];
@@ -32,19 +33,20 @@ void _onItemTapped(int index){
       body: Center(child: _widgetOptions[_selectedIndex]),
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
+        backgroundColor: Styles.grey300,
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
         elevation: 10,
         showSelectedLabels: false,
         showUnselectedLabels: false,
-        selectedItemColor: Colors.blueGrey,
-        unselectedItemColor: const Color(0xFF526480),
+        selectedItemColor: Styles.green900,
+        unselectedItemColor: Styles.green900,
         items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home),
-              activeIcon: Icon(Icons.home_max),
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home ),
               label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.pets),
-              activeIcon: Icon(Icons.pets_rounded),
+          BottomNavigationBarItem(icon: Icon(Icons.pets_outlined),
+              activeIcon: Icon(Icons.pets),
               label: "Search"),
           BottomNavigationBarItem(icon: Icon(Icons.person_3),
               activeIcon: Icon(Icons.person_4),

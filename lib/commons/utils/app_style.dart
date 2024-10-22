@@ -5,10 +5,11 @@ Color primary = const Color(0xFFeeedf2);
 class Styles{
   static Color primaryColor = primary;
   static Color textColor = const Color(0xFF3b3b3b);
-  static Color bgColor = const Color(0xFFeeedf2);  
+  static Color bgColor =   const Color(0xFFeeedf2);  
   static Color errorRed = Colors.red.shade700;
   static Color greenButton = green900;
   static Color orangeButton = orange900;
+  static Color bgPetBox = const Color(0xFFC9E8FF);
 
   static Color green900 = const Color(0xFF157759); 
 
@@ -36,6 +37,13 @@ class Styles{
   static TextStyle headLineStyle2 = TextStyle(fontSize: 21,color: textColor,fontWeight: FontWeight.bold);
   static TextStyle headLineStyle3 = TextStyle(fontSize: 17,color: Colors.grey.shade800,fontWeight: FontWeight.w500);
   static TextStyle headLineStyle4 = TextStyle(fontSize: 14,color: Colors.grey.shade800,fontWeight: FontWeight.w300);
+
+
+  static TextStyle headLineStyleGreen1 = TextStyle(fontSize: 26,color: green900,fontWeight: FontWeight.bold);
+  static TextStyle headLineStyleGreen2 = TextStyle(fontSize: 21,color: green900,fontWeight: FontWeight.bold);
+  static TextStyle headLineStyleGreen3 = TextStyle(fontSize: 17,color: green900,fontWeight: FontWeight.w500);
+  static TextStyle headLineStyleGreen4 = TextStyle(fontSize: 14,color: green900,fontWeight: FontWeight.w300);
+
 
 
   static const double radiousSize = 12;
