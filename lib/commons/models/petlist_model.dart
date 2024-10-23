@@ -1,12 +1,14 @@
 
 import 'dart:convert';
 
+import 'package:petetco/commons/models/pet_model.dart';
+
 PetList petListFromJson(String str) => PetList.fromJson(json.decode(str));
 
 String petListToJson(PetList data) => json.encode(data.toJson());
 
 class PetList {
-    List<Datum>? data;
+    List<Pet>? data;
     Pagination? pagination;
     String? message;
 
@@ -17,7 +19,7 @@ class PetList {
     });
 
     factory PetList.fromJson(Map<String, dynamic> json) => PetList(
-        data: json["data"] == null ? [] : List<Datum>.from(json["data"]!.map((x) => Datum.fromJson(x))),
+        data: json["data"] == null ? [] : List<Pet>.from(json["data"]!.map((x) => Pet.fromJson(x))),
         pagination: json["pagination"] == null ? null : Pagination.fromJson(json["pagination"]),
         message: json["message"],
     );
@@ -29,61 +31,6 @@ class PetList {
     };
 }
 
-class Datum {
-    final int? id;
-    final String? name;
-    final String? uuid;
-    final int? userId;
-    final Breed? breed;
-    final Breed? color;
-    final DateTime? dob;
-    final String? passportNumber;
-    final String? chipsetNumber;
-    final String? gender;
-    final String? cover;
-
-    Datum({
-        this.id,
-        this.name,
-        this.uuid,
-        this.userId,
-        this.breed,
-        this.color,
-        this.dob,
-        this.passportNumber,
-        this.chipsetNumber,
-        this.gender,
-        this.cover,
-    });
-
-    factory Datum.fromJson(Map<String, dynamic> json) => Datum(
-        id: json["id"],
-        name: json["name"],
-        uuid: json["uuid"],
-        userId: json["user_id"],
-        breed: json["breed"] == null ? null : Breed.fromJson(json["breed"]),
-        color: json["color"] == null ? null : Breed.fromJson(json["color"]),
-        dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
-        passportNumber: json["passport_number"],
-        chipsetNumber: json["chipset_number"],
-        gender: json["gender"],
-        cover: json["cover"],
-    );
-
-    Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "uuid": uuid,
-        "user_id": userId,
-        "breed": breed?.toJson(),
-        "color": color?.toJson(),
-        "dob": dob?.toIso8601String(),
-        "passport_number": passportNumber,
-        "chipset_number": chipsetNumber,
-        "gender": gender,
-        "cover": cover,
-    };
-}
 
 class Breed {
     final int? id;
