@@ -9,6 +9,7 @@ import 'package:petetco/commons/widget/loading_dialog.dart';
 import 'package:petetco/features/auth/controllers/userinfo_provider.dart';
 import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
 import 'package:petetco/features/pet/controllers/pet_provider.dart';
+import 'package:petetco/features/pet/widgets/petcard.dart';
 
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -44,11 +45,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
             );
             return;
           }
-
       petListInfo = petList;
       isLoading = false;
     });
-
   }
 
   @override
@@ -121,11 +120,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
                   
                   child: Row(
                     children: [
-                      Image.asset("assets/images/offer1.jpg", width: 300,height: 200,fit: BoxFit.fill,),
+                      Image.asset("assets/images/offer3.jpg", width: 300,height: 200,fit: BoxFit.fill,),
                       Gap(10),
                       Image.asset("assets/images/offer2.jpg", width: 300,height: 200,fit: BoxFit.fill,),
                       Gap(10),
-                      Image.asset("assets/images/offer3.jpg", width: 300, height: 200,fit: BoxFit.fill,),
+                      Image.asset("assets/images/offer1.jpg", width: 300, height: 200,fit: BoxFit.fill,),
                       Gap(10),
                       Image.asset("assets/images/offer4.jpg", width: 300, height: 200,fit: BoxFit.fill,)
       
@@ -134,6 +133,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
       
                 Gap(AppLayout.getHeight(30)),
       
+
+                //Your pet
                  Row(children: [
                   Text(
                     "Your pets",
@@ -151,50 +152,18 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
                    scrollDirection: Axis.horizontal,
                   
                   child: Row(
-                    children: petListInfo!.data!.map((e) => 
-                      Padding(
-                        padding: const EdgeInsets.only(right: 10),
-                        child: Container(
-                          width: 350,
-                          decoration: BoxDecoration(
-                            color: Styles.bgPetBox,
-                            borderRadius: BorderRadius.all(Radius.circular(15))
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Column(
-                              children: [
-                                Row(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Container(
-                                          width: 120,
-                                          height: 120,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(10),
-                                            image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: NetworkImage(e.cover.toString()),
-                                              ) 
-                                          ),
-                                        ), 
-                                    Gap(30),
-                                    Text(
-                                      e.name.toString(),
-                                      style: Styles.headLineStyleGreen1,
-                                      )
-                                  ],
-                                ),
-                              ],
-                            )
-                          ),
-                        ),
-                      )                  
-                    
-                    ).toList(),), 
+                    children: petListInfo!.data!.map((pet) => PetCard( 
+                      e: pet,
+                      cardWidth: 350,
+                      padding: EdgeInsets.only(right: 10),
+                      
+                      
+                      ) ).toList(),), 
                 ),
                 Gap(AppLayout.getHeight(20)), 
       
+
+                //PetShop part
                  Row(children: [
                   Text(
                     "PetShop list",
@@ -223,12 +192,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
       
                     ],), 
                 ),
-      
                 Gap(AppLayout.getHeight(30)), 
-      
-
-
-                 Row(children: [
+                //vet part
+                Row(children: [
                   Text(
                     "Vet list",
                     style: Styles.headLineStyle2,
@@ -246,13 +212,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
                   
                   child: Row(
                     children: [
-                      Image.asset("assets/images/vet1.jpg", width: 300,height: 200,fit: BoxFit.fill,),
+                      Image.asset("assets/images/vet4.jpg", width: 300,height: 200,fit: BoxFit.fill,),
                       Gap(10),
                       Image.asset("assets/images/vet2.jpg", width: 300,height: 200,fit: BoxFit.fill,),
                       Gap(10),
                       Image.asset("assets/images/vet3.jpg", width: 300, height: 200,fit: BoxFit.fill,),
                       Gap(10),
-                      Image.asset("assets/images/vet4.jpg", width: 300, height: 200,fit: BoxFit.fill,)
+                      Image.asset("assets/images/vet1.jpg", width: 300, height: 200,fit: BoxFit.fill,)
       
                     ],), 
                 ),
@@ -272,5 +238,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> with TickerProviderStat
       ]),
     );
   }
+
+
 }
 

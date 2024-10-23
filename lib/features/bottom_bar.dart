@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/features/home/pages/home_screen.dart';
+import 'package:petetco/features/pet/pages/listpet_screen.dart';
 
 class BottomBar extends StatefulWidget {
   const BottomBar({super.key});
@@ -14,9 +15,9 @@ class _BottomBarState extends State<BottomBar> {
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
-    const Text("Tickets"),
-    const Text("Tickets"),
-    const Text("Profile")
+    const ListPetScreen(),
+    const Text("Profile"),
+    const Text("Other")
   ];
 
 void _onItemTapped(int index){
