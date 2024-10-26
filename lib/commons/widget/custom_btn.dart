@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 class CustomButton extends StatelessWidget {
   const CustomButton({super.key, 
@@ -7,7 +8,7 @@ class CustomButton extends StatelessWidget {
                       required this.height, 
                       this.color, 
                       required this.borderColor, 
-                      required this.text });
+                      required this.text,  this.icon });
 
   final void Function()? onTap;
   final double width;
@@ -15,6 +16,7 @@ class CustomButton extends StatelessWidget {
   final Color? color;
   final Color borderColor;
   final Text text;
+  final Icon? icon;
 
 
   @override
@@ -30,7 +32,14 @@ class CustomButton extends StatelessWidget {
           border: Border.all(width: 1,color: borderColor )
         ),
         child: Center(
-          child: text,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            if (icon != null) icon!,
+            if (icon != null) const Gap(10),
+            text
+          ],),
         ),
       ),
     );

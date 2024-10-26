@@ -29,6 +29,8 @@ dependencies:
   image_picker:
   mime:
   video_player:
+  flutter_datetime_picker_plus: ^2.2.0
+  
  
 
 
