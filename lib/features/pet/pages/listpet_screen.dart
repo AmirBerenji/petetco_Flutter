@@ -6,6 +6,7 @@ import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/custom_btn.dart';
 import 'package:petetco/commons/widget/loading_dialog.dart';
 import 'package:petetco/features/pet/controllers/pet_provider.dart';
+import 'package:petetco/features/pet/pages/addpet_screen.dart';
 import 'package:petetco/features/pet/widgets/petcard.dart';
 
 class ListPetScreen extends ConsumerStatefulWidget {
@@ -45,7 +46,11 @@ PetList? petListInfo;
       return const LoadingDialog();
     }
     return Stack(
+      alignment: Alignment.bottomRight,
+
       children:[
+      
+      
       
       Container(
         color: Styles.bgColor,
@@ -67,12 +72,30 @@ PetList? petListInfo;
       ),
       
       
-      
-      Container(
+      Padding(
+        padding:  EdgeInsets.all(10.0),
+        child:  GestureDetector(
+          onTap: (){
+
+             Navigator.push(
+                              context, 
+                              MaterialPageRoute(
+                                builder: (context) => const AddPetScreen()
+                              )
+                            );
+          },
+          child: Container(
+            width: 60,
+            height: 60,
+            decoration: BoxDecoration(
+              color: Styles.green900,
+              borderRadius: BorderRadius.all(Radius.circular(50))
+            ),
+            child: Icon(Icons.add,color: Styles.grey100,),
+          ),)
+      ),
          
-        color: Colors.yellow,
-        child: CustomButton(width: 100, height: 50, borderColor: Colors.red, text: Text("data"))
-        ),
+        
     
     ]);
   }
