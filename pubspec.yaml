@@ -26,6 +26,9 @@ dependencies:
   awesome_dialog: ^3.2.1
   shared_preferences:
   flutter_spinkit:
+  image_picker:
+  mime:
+  video_player:
  
 
 
