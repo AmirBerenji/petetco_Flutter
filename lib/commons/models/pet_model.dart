@@ -18,7 +18,7 @@ class Pet {
     final int? userId;
     final PetBreed? breed;
     final Color? color;
-    final DateTime? dob;
+    final String? dob;
     final dynamic passportNumber;
     final dynamic chipsetNumber;
     final String? gender;
@@ -45,7 +45,7 @@ class Pet {
         userId: json["user_id"],
         breed: json["breed"] == null ? null : PetBreed.fromJson(json["breed"]),
         color: json["color"] == null ? null : Color.fromJson(json["color"]),
-        dob: json["dob"] == null ? null : DateTime.parse(json["dob"]),
+        dob: json["dob"],
         passportNumber: json["passport_number"],
         chipsetNumber: json["chipset_number"],
         gender: json["gender"],
@@ -59,7 +59,7 @@ class Pet {
         "user_id": userId,
         "breed": breed?.toJson(),
         "color": color?.toJson(),
-        "dob": dob?.toIso8601String(),
+        "dob": dob,
         "passport_number": passportNumber,
         "chipset_number": chipsetNumber,
         "gender": gender,
