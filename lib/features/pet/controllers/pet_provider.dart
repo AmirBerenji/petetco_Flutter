@@ -17,4 +17,8 @@ class PetState extends _$PetState {
     return petList;
   }
 
+  Future<bool> addPet() async{
+    return true;
+  }
+
 }

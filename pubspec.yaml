@@ -1,13 +1,12 @@
 name: petetco
 description: "This app for manage the pet"
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
   sdk: ^3.4.3
-
 
 dependencies:
   flutter:
@@ -15,8 +14,8 @@ dependencies:
 
   cupertino_icons: ^1.0.8
   flutter_screenutil: ^5.9.3
-  hooks_riverpod: 
-  riverpod_annotation: 
+  hooks_riverpod:
+  riverpod_annotation:
   smooth_page_indicator: ^1.2.0+3
   gap: ^3.0.1
   get:
@@ -30,9 +29,6 @@ dependencies:
   mime:
   video_player:
   flutter_datetime_picker_plus: ^2.2.0
-  
- 
-
 
 dev_dependencies:
   flutter_test:
@@ -40,28 +36,22 @@ dev_dependencies:
 
   flutter_lints: ^4.0.0
   flutter_native_splash: ^2.2.19
-  build_runner: 
-  riverpod_generator: 
+  build_runner:
+  riverpod_generator:
 
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/icons/logo.png  # Optional: path to the splash screen logo
+  image: assets/icons/logo.png # Optional: path to the splash screen logo
   android: true
   ios: true
-  fullscreen: true     # Optional: make the splash screen fullscreen
-
+  fullscreen: true # Optional: make the splash screen fullscreen
 
 flutter:
-
-
   uses-material-design: true
-
 
   assets:
     - assets/images/
     - assets/icons/
-
-  
 
   # example:
   # fonts:
