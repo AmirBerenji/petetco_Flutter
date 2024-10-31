@@ -1,7 +1,10 @@
 import 'dart:io';
 
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:dropdown_search/dropdown_search.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
@@ -18,6 +21,8 @@ class AddPetScreen extends StatefulWidget {
 }
 
 class _AddPetScreenState extends State<AddPetScreen> {
+  final List<String> _suggestions = ['Male', 'Female'];
+
   final ImagePicker _picker = ImagePicker();
   String? imagePath;
 
@@ -48,12 +53,15 @@ class _AddPetScreenState extends State<AddPetScreen> {
         body: ListView(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 110, right: 110),
+              padding: EdgeInsets.only(
+                  left: AppLayout.getHeight(110),
+                  right: AppLayout.getHeight(110)),
               child: Container(
                 width: 150,
                 height: 190,
                 decoration: BoxDecoration(
-                    borderRadius: const BorderRadius.all(Radius.circular(200)),
+                    borderRadius: BorderRadius.all(
+                        Radius.circular(AppLayout.getHeight(200))),
                     border: Border.all(width: 1, color: Styles.grey500),
                     image: DecorationImage(
                         fit: BoxFit.cover,
@@ -61,7 +69,9 @@ class _AddPetScreenState extends State<AddPetScreen> {
                             File(imagePath ?? "assets/images/vet4.jpg")))),
                 child: Stack(children: [
                   Padding(
-                    padding: const EdgeInsets.only(right: 15, bottom: 15),
+                    padding: EdgeInsets.only(
+                        right: AppLayout.getHeight(15),
+                        bottom: AppLayout.getHeight(15)),
                     child: Container(
                         alignment: Alignment.bottomRight,
                         child: Icon(
@@ -76,9 +86,9 @@ class _AddPetScreenState extends State<AddPetScreen> {
                         context: context,
                         body: Column(
                           children: [
-                            Gap(10),
+                            Gap(AppLayout.getHeight(10)),
                             CustomButton(
-                              icon: Icon(Icons.photo_album_sharp),
+                              icon: const Icon(Icons.photo_album_sharp),
                               width: 250,
                               height: 50,
                               borderColor: Styles.grey600,
@@ -91,7 +101,7 @@ class _AddPetScreenState extends State<AddPetScreen> {
                                 await setPicPath(ImageSource.gallery);
                               },
                             ),
-                            Gap(10),
+                            Gap(AppLayout.getHeight(10)),
                             CustomButton(
                               icon: const Icon(Icons.camera_enhance),
                               width: 250,
@@ -128,9 +138,262 @@ class _AddPetScreenState extends State<AddPetScreen> {
                   textInputAction: TextInputAction.next,
                 ),
                 Gap(AppLayout.getHeight(15)),
+                DropdownSearch<String>(
+                  items: _suggestions,
+                  selectedItem: "Please Select Kind",
+                  dropdownDecoratorProps: DropDownDecoratorProps(
+                    baseStyle: Styles.headLineStyle3,
+                    dropdownSearchDecoration: InputDecoration(
+                      prefix: Text(
+                        "Kind: ",
+                        style: Styles.headLineStyle4,
+                      ),
+                      constraints: BoxConstraints(
+                        maxWidth: AppLayout.getScreenWidth() * 0.9,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Styles.grey600, // Set your border color here
+                          width: 1, // Set your preferred border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Styles
+                              .grey600, // Set your border color here for inactive state
+                          width: 1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Styles
+                              .green900, // Set your border color here for active state
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  popupProps: PopupProps.modalBottomSheet(
+                    showSelectedItems: true,
+                    modalBottomSheetProps: ModalBottomSheetProps(
+                      backgroundColor: Styles.bgColor,
+                    ),
+                    searchFieldProps: TextFieldProps(
+                      padding: EdgeInsets.all(20),
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          borderSide: BorderSide(
+                            color: Styles.grey600, // Set the border color here
+                            width: 1,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(
+                            color: Styles
+                                .grey600, // Set the border color for inactive state
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(
+                            color: Styles
+                                .grey600, // Set the border color for active state
+                            width: 1.5,
+                          ),
+                        ),
+                        hintText: "Search Please",
+                        hintStyle: Styles.headLineStyle3
+                            .copyWith(color: Styles.grey500),
+                        suffixIcon: Icon(Icons.search),
+                      ),
+                    ),
+                    showSearchBox: true,
+                    constraints: BoxConstraints.expand(
+                      height: 750,
+                      width: 450,
+                    ),
+                  ),
+                ),
                 
+                Gap(AppLayout.getHeight(15)),
+                DropdownSearch<String>(
+                  items: _suggestions,
+                  selectedItem: "Please Select Breed",
+                  dropdownDecoratorProps: DropDownDecoratorProps(
+                    baseStyle: Styles.headLineStyle3,
+                    dropdownSearchDecoration: InputDecoration(
+                      prefix: Text(
+                        "Breed: ",
+                        style: Styles.headLineStyle4,
+                      ),
+                      constraints: BoxConstraints(
+                        maxWidth: AppLayout.getScreenWidth() * 0.9,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Styles.grey600, // Set your border color here
+                          width: 1, // Set your preferred border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Styles
+                              .grey600, // Set your border color here for inactive state
+                          width: 1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Styles
+                              .green900, // Set your border color here for active state
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  popupProps: PopupProps.modalBottomSheet(
+                    showSelectedItems: true,
+                    modalBottomSheetProps: ModalBottomSheetProps(
+                      backgroundColor: Styles.bgColor,
+                    ),
+                    searchFieldProps: TextFieldProps(
+                      padding: EdgeInsets.all(20),
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          borderSide: BorderSide(
+                            color: Styles.grey600, // Set the border color here
+                            width: 1,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(
+                            color: Styles
+                                .grey600, // Set the border color for inactive state
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(
+                            color: Styles
+                                .grey600, // Set the border color for active state
+                            width: 1.5,
+                          ),
+                        ),
+                        hintText: "Search Please",
+                        hintStyle: Styles.headLineStyle3
+                            .copyWith(color: Styles.grey500),
+                        suffixIcon: Icon(Icons.search),
+                      ),
+                    ),
+                    showSearchBox: true,
+                    constraints: BoxConstraints.expand(
+                      height: 750,
+                      width: 450,
+                    ),
+                  ),
+                ),
                 
+
+                Gap(AppLayout.getHeight(15)),
+                DropdownSearch<String>(
+                  items: _suggestions,
+                  selectedItem: "Please Select Gender",
+                  dropdownDecoratorProps: DropDownDecoratorProps(
+                    baseStyle: Styles.headLineStyle3,
+                    dropdownSearchDecoration: InputDecoration(
+                      prefix: Text(
+                        "Gender: ",
+                        style: Styles.headLineStyle4,
+                      ),
+                      constraints: BoxConstraints(
+                        maxWidth: AppLayout.getScreenWidth() * 0.9,
+                      ),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Styles.grey600, // Set your border color here
+                          width: 1, // Set your preferred border width
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Styles
+                              .grey600, // Set your border color here for inactive state
+                          width: 1,
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                        borderSide: BorderSide(
+                          color: Styles
+                              .green900, // Set your border color here for active state
+                          width: 2.0,
+                        ),
+                      ),
+                    ),
+                  ),
+                  popupProps: PopupProps.modalBottomSheet(
+                    showSelectedItems: true,
+                    modalBottomSheetProps: ModalBottomSheetProps(
+                      backgroundColor: Styles.bgColor,
+                    ),
+                    searchFieldProps: TextFieldProps(
+                      padding: EdgeInsets.all(20),
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(15)),
+                          borderSide: BorderSide(
+                            color: Styles.grey600, // Set the border color here
+                            width: 1,
+                          ),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(
+                            color: Styles
+                                .grey600, // Set the border color for inactive state
+                            width: 1,
+                          ),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(15),
+                          borderSide: BorderSide(
+                            color: Styles
+                                .grey600, // Set the border color for active state
+                            width: 1.5,
+                          ),
+                        ),
+                        hintText: "Search Please",
+                        hintStyle: Styles.headLineStyle3
+                            .copyWith(color: Styles.grey500),
+                        suffixIcon: Icon(Icons.search),
+                      ),
+                    ),
+                    showSearchBox: true,
+                    constraints: BoxConstraints.expand(
+                      height: 750,
+                      width: 450,
+                    ),
+                  ),
+                ),
                 
+
 
                 Gap(AppLayout.getHeight(15)),
                 CustomTextField(
@@ -148,14 +411,6 @@ class _AddPetScreenState extends State<AddPetScreen> {
                   controller: _dob,
                   hintStyle: TextStyle(color: Styles.grey600),
                   keyboardType: TextInputType.none,
-                  textInputAction: TextInputAction.next,
-                ),
-                Gap(AppLayout.getHeight(15)),
-                CustomTextField(
-                  hintText: "Gender",
-                  controller: _gender,
-                  hintStyle: TextStyle(color: Styles.grey600),
-                  keyboardType: TextInputType.text,
                   textInputAction: TextInputAction.next,
                 ),
                 Gap(AppLayout.getHeight(15)),
@@ -184,7 +439,8 @@ class _AddPetScreenState extends State<AddPetScreen> {
                       "Save",
                       style:
                           Styles.headLineStyle3.copyWith(color: Styles.grey100),
-                    ))
+                    )),
+                    Gap(AppLayout.getHeight(35)),
               ],
             )
           ],
