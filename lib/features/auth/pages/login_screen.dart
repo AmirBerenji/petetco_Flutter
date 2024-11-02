@@ -12,7 +12,6 @@ import 'package:petetco/commons/widget/custome_textfield.dart';
 import 'package:petetco/features/auth/controllers/login_provider.dart';
 import 'package:petetco/features/auth/pages/register_screen.dart';
 import 'package:petetco/features/bottom_bar.dart';
-import 'package:petetco/features/home/pages/home_screen.dart';
 
 
 class LoginScreen extends ConsumerStatefulWidget {
@@ -101,7 +100,7 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                             Navigator.pushReplacement(
                               context, 
                               MaterialPageRoute(
-                                builder: (context) => const BottomBar()
+                                builder: (context) => BottomBar()
                               )
                             );
 

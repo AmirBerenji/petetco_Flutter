@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class PictureAnimation extends StatefulWidget {
   const PictureAnimation({super.key});
 
@@ -9,7 +8,8 @@ class PictureAnimation extends StatefulWidget {
   _PictureAnimationState createState() => _PictureAnimationState();
 }
 
-class _PictureAnimationState extends State<PictureAnimation> with SingleTickerProviderStateMixin {
+class _PictureAnimationState extends State<PictureAnimation>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
 
@@ -25,8 +25,8 @@ class _PictureAnimationState extends State<PictureAnimation> with SingleTickerPr
 
     // Define the tween for vertical movement
     _animation = Tween<double>(
-      begin: 1.0,  // Start from the bottom (full height)
-      end: 0.0,    // Move to the top (zero height)
+      begin: 1.0, // Start from the bottom (full height)
+      end: 0.0, // Move to the top (zero height)
     ).animate(CurvedAnimation(
       parent: _controller,
       curve: Curves.easeInOut,
@@ -42,13 +42,11 @@ class _PictureAnimationState extends State<PictureAnimation> with SingleTickerPr
     super.dispose();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Stack(
-      
         children: [
           // Positioned widget to animate the image
           Positioned(
@@ -58,7 +56,7 @@ class _PictureAnimationState extends State<PictureAnimation> with SingleTickerPr
             child: SlideTransition(
               position: Tween<Offset>(
                 begin: const Offset(0, 1), // Start from bottom
-                end: const Offset(0, 0),   // End at the original position
+                end: const Offset(0, 0), // End at the original position
               ).animate(_controller),
               child: Image.asset(
                 'assets/images/splash1.png', // Example image

@@ -2,13 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:petetco/commons/helper/shared_stroge.dart';
-import 'package:petetco/commons/models/login_model.dart';
 import 'package:petetco/commons/utils/app_layout.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/features/auth/controllers/userinfo_provider.dart';
-import 'package:petetco/features/auth/pages/login_screen.dart';
 import 'package:petetco/features/bottom_bar.dart';
-import 'package:petetco/features/home/pages/home_screen.dart';
 import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
 import 'package:petetco/features/splash/widgets/picture_animation.dart';
 
@@ -48,7 +45,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
           
         }else{
           Navigator.of(context).pushReplacement(MaterialPageRoute(
-            builder: (_) => const BottomBar()
+            builder: (_) =>  BottomBar()
           ));
         }
 

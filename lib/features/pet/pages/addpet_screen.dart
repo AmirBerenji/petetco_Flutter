@@ -8,14 +8,14 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:petetco/commons/dto/petAdd_dto.dart';
 import 'package:petetco/commons/models/color_model.dart';
-import 'package:petetco/commons/models/petKindList_model.dart';
 import 'package:petetco/commons/models/petbreed_mode.dart';
 import 'package:petetco/commons/models/petkind_model.dart';
-import 'package:petetco/commons/models/petlist_model.dart';
 import 'package:petetco/commons/utils/app_layout.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/custom_btn.dart';
+import 'package:petetco/commons/widget/custome_dialog.dart';
 import 'package:petetco/commons/widget/custome_textfield.dart';
+import 'package:petetco/features/bottom_bar.dart';
 import 'package:petetco/features/pet/controllers/pet_info_provider.dart';
 import 'package:petetco/features/pet/controllers/pet_provider.dart';
 
@@ -73,6 +73,46 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
       _petColorList = petColor.data;
       isLoading = false;
     });
+  }
+
+  Future<void> _addPet() async {
+
+
+    if (imageSource == null) {
+      CustomAwesomeDialog(context, "Please select picture ", DialogType.error)
+          .show();
+      return;
+    } else if (_petName.text.trim() == null ||
+        _petGender.toString().trim() == null ||
+        _petGender.toString().trim() == "" ||
+        _dob.text.trim() == null ||
+        _petBreed.id == null ||
+        _petColor.id == null) {
+      CustomAwesomeDialog(context, "Please fill all data!", DialogType.error)
+          .show();
+    } else {
+      var petAddDto = PetAddDto();
+      petAddDto.name = _petName.text;
+      petAddDto.ChipsetNumber = _chipsetNumber.text.trim();
+      petAddDto.PassportNumber = _passportNumber.text.trim();
+      petAddDto.cover = imageSource;
+      petAddDto.breedId = _petBreed.id!;
+      petAddDto.colorId = _petColor.id!;
+      petAddDto.gender = _petGender.toString();
+      petAddDto.dob = _dob.text;
+      var result = await ref.read(petStateProvider.notifier).addPet(petAddDto);
+      if (result) {
+        await Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => BottomBar())).then(
+              (_){
+              BottomBar.mainPageKey.currentState?.navigateTo(2);
+            }
+            );
+      } else {
+        CustomAwesomeDialog(context, "We have some problem ", DialogType.error)
+            .show();
+      }
+    }
   }
 
   @override
@@ -561,18 +601,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                     style:
                         Styles.headLineStyle3.copyWith(color: Styles.grey100),
                   ),
-                  onTap: () async {
-                    var petAddDto = PetAddDto();
-                    petAddDto.name = _petName.text;
-                    petAddDto.ChipsetNumber = _chipsetNumber.text;
-                    petAddDto.PassportNumber = _passportNumber.text;
-                    petAddDto.cover = imageSource;
-                    petAddDto.breedId = _petBreed.id!;
-                    petAddDto.colorId = _petColor.id!;
-                    petAddDto.gender = _petGender.toString();
-                    petAddDto.dob = _dob.text;
-                    await ref.read(petStateProvider.notifier).addPet(petAddDto);
-                  },
+                  onTap: () async => await _addPet(),
                 ),
                 Gap(AppLayout.getHeight(35)),
               ],
