@@ -1,3 +1,4 @@
+import 'package:petetco/commons/dto/petAdd_dto.dart';
 import 'package:petetco/commons/models/petlist_model.dart';
 import 'package:petetco/commons/services/pet_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -17,7 +18,8 @@ class PetState extends _$PetState {
     return petList;
   }
 
-  Future<bool> addPet() async{
+  Future<bool> addPet(PetAddDto petAdd) async{
+    var result = await PetService().addPet(petAdd);  
     return true;
   }
 

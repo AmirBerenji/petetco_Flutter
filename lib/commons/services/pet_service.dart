@@ -1,9 +1,11 @@
 import 'dart:convert';
 
+import 'package:petetco/commons/dto/petAdd_dto.dart';
 import 'package:petetco/commons/models/pet_model.dart';
 import 'package:petetco/commons/models/petlist_model.dart';
 import 'package:petetco/commons/services/basic_service.dart';
 import 'package:http/http.dart' as http;
+import 'dart:io';
 
 class PetService extends BasicService {
   Future<PetList> getAllPet() async {
@@ -26,29 +28,45 @@ class PetService extends BasicService {
     }
   }
 
-  Future<PetList> addPet(Pet pet) async {
-    var token = await getToken();
+  Future<bool> addPet(PetAddDto pet) async {
+  var token = await getToken();
+  final url = Uri.parse('$baseUrl/pets');
 
-    final url = Uri.parse('$baseUrl/pets');
+  // Create a multipart request
+  var request = http.MultipartRequest('POST', url)
+    ..headers['Authorization'] = 'Bearer $token'
+    ..headers['Accept'] = 'application/json';
 
-    final response = await http.post(url, headers: <String, String>{
-      'Authorization': 'Bearer $token',
-    },
-    body: jsonEncode(<String, String>{
-        'name': pet.name.toString(),
-        'dob': pet.dob.toString() ,
-      }),);
+  // Add fields to the request
+  request.fields['name'] = pet.name.toString();
+  request.fields['dob'] = pet.dob.toString();
+  request.fields['breed_id'] = pet.breedId.toString();
+  request.fields['color_id'] = pet.colorId.toString();
+  request.fields['gender'] = pet.gender.toString();
+  request.fields['passport_number'] = pet.PassportNumber.toString();
+  request.fields['chipset_number'] = pet.ChipsetNumber.toString();
 
-    var petList = PetList();
-    if (response.statusCode == 200) {
-      petList = petListFromJson(response.body);
-      return petList;
-    } else {
-      var errorMessage = jsonDecode(response.body);
-      petList.message = errorMessage["message"];
-      return petList;
-    }
+  // Attach the image file
+  if (pet.cover != null) {
+    request.files.add(
+      await http.MultipartFile.fromPath(
+        'cover_image', // Field name expected by the backend
+        pet.cover.path, // Path of the image file
+        // Adjust if your image format differs
+      ),
+    );
   }
+
+  // Send the request
+  final response = await request.send();
+
+  // Check the response status
+  if (response.statusCode == 200) {
+    return true;
+  } else {
+    return false;
+  }
+}
 
   
 }
