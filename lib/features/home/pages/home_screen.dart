@@ -123,21 +123,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       height: 200,
                       fit: BoxFit.fill,
                     ),
-                    Gap(10),
+                    Gap(AppLayout.getHeight(10)),
                     Image.asset(
                       "assets/images/offer2.jpg",
                       width: 300,
                       height: 200,
                       fit: BoxFit.fill,
                     ),
-                    Gap(10),
+                    Gap(AppLayout.getHeight(10)),
                     Image.asset(
                       "assets/images/offer1.jpg",
                       width: 300,
                       height: 200,
                       fit: BoxFit.fill,
                     ),
-                    Gap(10),
+                    Gap(AppLayout.getHeight(10)),
                     Image.asset(
                       "assets/images/offer4.jpg",
                       width: 300,
@@ -172,7 +172,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       .map((pet) => PetCard(
                             e: pet,
                             cardWidth: 350,
-                            padding: EdgeInsets.only(right: 10),
+                            padding: EdgeInsets.only(right: AppLayout.getHeight(10)),
                           ))
                       .toList(),
                 ),
@@ -204,21 +204,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       height: 200,
                       fit: BoxFit.fill,
                     ),
-                    Gap(10),
+                    Gap(AppLayout.getHeight(10)),
                     Image.asset(
                       "assets/images/petshop2.jpg",
                       width: 300,
                       height: 200,
                       fit: BoxFit.fill,
                     ),
-                    Gap(10),
+                    Gap(AppLayout.getHeight(10)),
                     Image.asset(
                       "assets/images/petshop3.jpg",
                       width: 300,
                       height: 200,
                       fit: BoxFit.fill,
                     ),
-                    Gap(10),
+                    Gap(AppLayout.getHeight(10)),
                     Image.asset(
                       "assets/images/petshop4.jpg",
                       width: 300,
@@ -257,21 +257,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     Gap(AppLayout.getHeight(10)),
                     Image.asset(
                       "assets/images/vet2.jpg",
-                      width:  AppLayout.getWidth(300),
+                      width: AppLayout.getWidth(300),
                       height: 200,
                       fit: BoxFit.fill,
                     ),
                     Gap(AppLayout.getHeight(10)),
                     Image.asset(
                       "assets/images/vet3.jpg",
-                      width:  AppLayout.getWidth(300),
+                      width: AppLayout.getWidth(300),
                       height: 200,
                       fit: BoxFit.fill,
                     ),
                     Gap(AppLayout.getHeight(10)),
                     Image.asset(
                       "assets/images/vet1.jpg",
-                      width:  AppLayout.getWidth(300),
+                      width: AppLayout.getWidth(300),
                       height: 200,
                       fit: BoxFit.fill,
                     )

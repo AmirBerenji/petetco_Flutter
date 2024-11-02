@@ -20,7 +20,7 @@ class PetState extends _$PetState {
 
   Future<bool> addPet(PetAddDto petAdd) async{
     var result = await PetService().addPet(petAdd);  
-    return true;
+    return result;
   }
 
 }

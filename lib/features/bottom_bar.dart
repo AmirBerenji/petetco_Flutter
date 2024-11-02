@@ -4,14 +4,26 @@ import 'package:petetco/features/home/pages/home_screen.dart';
 import 'package:petetco/features/pet/pages/listpet_screen.dart';
 
 class BottomBar extends StatefulWidget {
-  const BottomBar({super.key});
+
+static final GlobalKey<_BottomBarState> mainPageKey = GlobalKey<_BottomBarState>();
+
+  BottomBar() : super(key: mainPageKey); 
+
+
+
+  //const BottomBar({super.key});
 
   @override
   State<BottomBar> createState() => _BottomBarState();
 }
 
 class _BottomBarState extends State<BottomBar> {
+
   int _selectedIndex = 0;
+
+  void navigateTo(int id) {
+    _onItemTapped(id); // Set index to 1 to go to Profile
+  }
 
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),

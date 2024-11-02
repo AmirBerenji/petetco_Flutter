@@ -1,11 +1,9 @@
 import 'dart:convert';
 
 import 'package:petetco/commons/dto/petAdd_dto.dart';
-import 'package:petetco/commons/models/pet_model.dart';
 import 'package:petetco/commons/models/petlist_model.dart';
 import 'package:petetco/commons/services/basic_service.dart';
 import 'package:http/http.dart' as http;
-import 'dart:io';
 
 class PetService extends BasicService {
   Future<PetList> getAllPet() async {
