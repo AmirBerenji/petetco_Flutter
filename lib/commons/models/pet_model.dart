@@ -17,7 +17,7 @@ class Pet {
     final String? uuid;
     final int? userId;
     final PetBreed? breed;
-    final Color? color;
+    final PetColor? color;
     final String? dob;
     final dynamic passportNumber;
     final dynamic chipsetNumber;
@@ -44,7 +44,7 @@ class Pet {
         uuid: json["uuid"],
         userId: json["user_id"],
         breed: json["breed"] == null ? null : PetBreed.fromJson(json["breed"]),
-        color: json["color"] == null ? null : Color.fromJson(json["color"]),
+        color: json["color"] == null ? null : PetColor.fromJson(json["color"]),
         dob: json["dob"],
         passportNumber: json["passport_number"],
         chipsetNumber: json["chipset_number"],

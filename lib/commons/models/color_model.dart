@@ -4,20 +4,20 @@
 
 import 'dart:convert';
 
-Color colorFromJson(String str) => Color.fromJson(json.decode(str));
+PetColor colorFromJson(String str) => PetColor.fromJson(json.decode(str));
 
-String colorToJson(Color data) => json.encode(data.toJson());
+String colorToJson(PetColor data) => json.encode(data.toJson());
 
-class Color {
+class PetColor {
     final int? id;
     final String? name;
 
-    Color({
+    PetColor({
         this.id,
         this.name,
     });
 
-    factory Color.fromJson(Map<String, dynamic> json) => Color(
+    factory PetColor.fromJson(Map<String, dynamic> json) => PetColor(
         id: json["id"],
         name: json["name"],
     );
