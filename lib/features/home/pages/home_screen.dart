@@ -7,6 +7,7 @@ import 'package:petetco/commons/utils/app_layout.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/loading_dialog.dart';
 import 'package:petetco/features/auth/controllers/userinfo_provider.dart';
+import 'package:petetco/features/bottom_bar.dart';
 import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
 import 'package:petetco/features/pet/controllers/pet_provider.dart';
 import 'package:petetco/features/pet/widgets/petcard.dart';
@@ -158,10 +159,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                     style: Styles.headLineStyle2,
                   ),
                   const Spacer(),
-                  Text(
-                    "View all",
-                    style: Styles.headLineStyleGreen4,
-                  ),
+                  GestureDetector(
+                    child: Text(
+                      "View all",
+                      style: Styles.headLineStyleGreen4,
+                    ),
+                    onTap: () {
+                      BottomBar.mainPageKey.currentState?.navigateTo(1);
+                    },
+                  )
                 ],
               ),
               Gap(AppLayout.getHeight(5)),
@@ -169,10 +175,12 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: petListInfo!.data!
+                      .take(3)
                       .map((pet) => PetCard(
                             e: pet,
                             cardWidth: 350,
-                            padding: EdgeInsets.only(right: AppLayout.getHeight(10)),
+                            padding:
+                                EdgeInsets.only(right: AppLayout.getHeight(10)),
                           ))
                       .toList(),
                 ),
