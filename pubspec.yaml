@@ -30,7 +30,9 @@ dependencies:
   video_player:
   flutter_datetime_picker_plus: ^2.2.0
   dropdown_search: ^5.0.6
+  internet_connection_checker_plus:
 
+  
 
 dev_dependencies:
   flutter_test:
