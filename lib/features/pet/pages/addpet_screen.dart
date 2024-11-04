@@ -41,7 +41,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
   late PetBreed _petBreed;
   List<PetColor>? _petColorList;
   late PetColor _petColor;
-  late String _petGender;
+  String? _petGender;
 
   Future<void> setPicPath(ImageSource imgSource) async {
     final XFile? pickedFile = await _picker.pickImage(source: imgSource);
@@ -105,7 +105,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
         await Navigator.pushReplacement(context,
             MaterialPageRoute(builder: (context) => BottomBar())).then(
               (_){
-              BottomBar.mainPageKey.currentState?.navigateTo(2);
+              BottomBar.mainPageKey.currentState?.navigateTo(1);
             }
             );
       } else {
