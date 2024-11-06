@@ -15,29 +15,27 @@ class ListPetScreen extends ConsumerStatefulWidget {
   ConsumerState<ListPetScreen> createState() => _ListPetScreenState();
 }
 
-class _ListPetScreenState extends ConsumerState<ListPetScreen> with TickerProviderStateMixin {
-bool isLoading = true; 
-PetList? petListInfo;
+class _ListPetScreenState extends ConsumerState<ListPetScreen>
+    with TickerProviderStateMixin {
+  bool isLoading = true;
+  PetList? petListInfo;
 
-
-@override
+  @override
   void initState() {
     super.initState();
     _checkStatus();
   }
 
-
- Future<void> _checkStatus() async {
+  Future<void> _checkStatus() async {
     // Fetch user info asynchronously
     final petList = await ref.read(petStateProvider.notifier).getAllPet();
     // Update state when data is fetched
     setState(() {
-      
       petListInfo = petList;
       isLoading = false;
     });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     AppLayout.getSize(context);
@@ -45,58 +43,46 @@ PetList? petListInfo;
     if (isLoading) {
       return const LoadingDialog();
     }
-    return Stack(
-      alignment: Alignment.bottomRight,
-
-      children:[
-      
-      
-      
+    return Stack(alignment: Alignment.bottomRight, children: [
       Container(
         color: Styles.bgColor,
         child: ListView(
           children: [
             Padding(
-              padding: EdgeInsets.only(top:30,left: 10,right: 10),
-              child:Column(
-                children: petListInfo!.data!.map((pet) => PetCard( 
-                  e: pet,
-                  cardWidth: 450,
-                  padding: EdgeInsets.only(bottom: 15),
-                  )
-                   ).toList(),) 
-                ) ,
-              
+                padding: const EdgeInsets.only(top: 30, left: 10, right: 10),
+                child: Column(
+                  children: petListInfo!.data!
+                      .map((pet) => PetCard(
+                            e: pet,
+                            cardWidth: 450,
+                            padding: const EdgeInsets.only(bottom: 15),
+                          ))
+                      .toList(),
+                )),
           ],
         ),
       ),
-      
-      
       Padding(
-        padding:  EdgeInsets.all(10.0),
-        child:  GestureDetector(
-          onTap: (){
-
-             Navigator.push(
-                              context, 
-                              MaterialPageRoute(
-                                builder: (context) => const AddPetScreen()
-                              )
-                            );
-          },
-          child: Container(
-            width: 60,
-            height: 60,
-            decoration: BoxDecoration(
-              color: Styles.green900,
-              borderRadius: BorderRadius.all(Radius.circular(50))
+          padding: const EdgeInsets.all(10.0),
+          child: GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const AddPetScreen()));
+            },
+            child: Container(
+              width: 60,
+              height: 60,
+              decoration: BoxDecoration(
+                  color: Styles.green900,
+                  borderRadius: const BorderRadius.all(Radius.circular(50))),
+              child: Icon(
+                Icons.add,
+                color: Styles.grey100,
+              ),
             ),
-            child: Icon(Icons.add,color: Styles.grey100,),
-          ),)
-      ),
-         
-        
-    
+          )),
     ]);
   }
 }

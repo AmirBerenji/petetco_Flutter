@@ -8,6 +8,7 @@ import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/loading_dialog.dart';
 import 'package:petetco/features/auth/controllers/userinfo_provider.dart';
 import 'package:petetco/features/bottom_bar.dart';
+import 'package:petetco/features/home/widgets/head_list.dart';
 import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
 import 'package:petetco/features/pet/controllers/pet_provider.dart';
 import 'package:petetco/features/pet/widgets/petcard.dart';
@@ -52,7 +53,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   @override
   Widget build(BuildContext context) {
     AppLayout.getSize(context);
-    // Show a loading screen until data is fetched
     if (isLoading) {
       return const LoadingDialog();
     }
@@ -85,33 +85,28 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       ),
                     ],
                   ),
-                  Container(
-                    width: 70,
-                    height: 70,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          fit: BoxFit.cover,
-                          image:
-                              NetworkImage(userInfo!.data!.avatar.toString()),
-                        )),
+                  GestureDetector(
+                    onTap: () {
+                      BottomBar.mainPageKey.currentState?.navigateTo(2);
+                    },
+                    child: Container(
+                      width: 70,
+                      height: 70,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            fit: BoxFit.cover,
+                            image:
+                                NetworkImage(userInfo!.data!.avatar.toString()),
+                          )),
+                    ),
                   )
                 ],
               ),
               Gap(AppLayout.getHeight(40)),
 
-              Row(
-                children: [
-                  Text(
-                    "Our Offer",
-                    style: Styles.headLineStyle2,
-                  ),
-                  const Spacer(),
-                  Text(
-                    "View all",
-                    style: Styles.headLineStyleGreen4,
-                  ),
-                ],
+              const HeadList(
+                listText: "Our offer",
               ),
               Gap(AppLayout.getHeight(5)),
               SingleChildScrollView(
@@ -152,23 +147,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               Gap(AppLayout.getHeight(30)),
 
               //Your pet
-              Row(
-                children: [
-                  Text(
-                    "Your pets",
-                    style: Styles.headLineStyle2,
-                  ),
-                  const Spacer(),
-                  GestureDetector(
-                    child: Text(
-                      "View all",
-                      style: Styles.headLineStyleGreen4,
-                    ),
-                    onTap: () {
-                      BottomBar.mainPageKey.currentState?.navigateTo(1);
-                    },
-                  )
-                ],
+              HeadList(
+                listText: "Your pets",
+                onTap: () {
+                  BottomBar.mainPageKey.currentState?.navigateTo(1);
+                },
               ),
               Gap(AppLayout.getHeight(5)),
               SingleChildScrollView(
@@ -188,18 +171,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               Gap(AppLayout.getHeight(20)),
 
               //PetShop part
-              Row(
-                children: [
-                  Text(
-                    "PetShop list",
-                    style: Styles.headLineStyle2,
-                  ),
-                  const Spacer(),
-                  Text(
-                    "View all",
-                    style: Styles.headLineStyleGreen4,
-                  ),
-                ],
+              const HeadList(
+                listText: "Petshop list",
               ),
               Gap(AppLayout.getHeight(5)),
               SingleChildScrollView(
@@ -238,18 +211,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               ),
               Gap(AppLayout.getHeight(30)),
               //vet part
-              Row(
-                children: [
-                  Text(
-                    "Vet list",
-                    style: Styles.headLineStyle2,
-                  ),
-                  const Spacer(),
-                  Text(
-                    "View all",
-                    style: Styles.headLineStyleGreen4,
-                  ),
-                ],
+              const HeadList(
+                listText: "Vet list",
               ),
               Gap(AppLayout.getHeight(5)),
               SingleChildScrollView(

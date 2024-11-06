@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:petetco/commons/utils/app_style.dart';
+import 'package:petetco/features/auth/pages/profile_screen.dart';
 import 'package:petetco/features/home/pages/home_screen.dart';
 import 'package:petetco/features/pet/pages/listpet_screen.dart';
 
@@ -28,7 +30,7 @@ class _BottomBarState extends State<BottomBar> {
   static final List<Widget> _widgetOptions = <Widget>[
     const HomeScreen(),
     const ListPetScreen(),
-    const Text("Profile"),
+    const ProfileScreen(),
     const Text("Other")
   ];
 
@@ -54,19 +56,19 @@ void _onItemTapped(int index){
         showUnselectedLabels: false,
         selectedItemColor: Styles.green900,
         unselectedItemColor: Styles.green900,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home_outlined),
-              activeIcon: Icon(Icons.home ),
+        items:  [
+          BottomNavigationBarItem(icon: Icon(Icons.home,color: Styles.grey700,),
+              activeIcon: Icon(Icons.home,color: Styles.green900, ),
               label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.pets_outlined),
-              activeIcon: Icon(Icons.pets),
+          BottomNavigationBarItem(icon: Icon(Icons.pets,color: Styles.grey700,),
+              activeIcon: Icon(Icons.pets,color: Styles.green900,),
               label: "Search"),
-          BottomNavigationBarItem(icon: Icon(Icons.person_3),
-              activeIcon: Icon(Icons.person_4),
+          BottomNavigationBarItem(icon: Icon(Icons.person,color: Styles.grey700,),
+              activeIcon: Icon(Icons.person,color: Styles.green900,),
               label: "Ticket"),
-          BottomNavigationBarItem(icon: Icon(Icons.more),
-              activeIcon: Icon(Icons.more)
-              ,label: "Profile"),
+          BottomNavigationBarItem(icon: Icon(Icons.more,color: Styles.grey700,),
+              activeIcon: Icon(Icons.more,color: Styles.green900,)
+              ,label: "More Option"),
       ])
     );
   }
