@@ -23,5 +23,9 @@ class UserInfoState extends _$UserInfoState {
     return result;
   }
 
+  Future<bool> logoutProfile() async{
+    await AuthService().Logout();
+    return true;
+  }
 
 }

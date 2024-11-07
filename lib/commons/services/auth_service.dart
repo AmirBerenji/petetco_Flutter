@@ -37,6 +37,10 @@ class AuthService extends BasicService {
     }
   }
 
+  Future<void> Logout() async{
+    await removeToken();
+  }
+
   Future<UserLogin> register(UserCreate userCreate) async {
     final url = Uri.parse('$baseUrl/register');
 
