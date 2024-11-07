@@ -18,4 +18,9 @@ class BasicService{
     return token ?? "";
   }
 
+  Future<bool> removeToken() async{
+    storage.deletevalue("token");
+    return true;
+  }
+
 }
