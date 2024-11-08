@@ -62,8 +62,10 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
   ImageProvider<Object> _checkImage() {
     if (imageSource?.path != null) {
       return FileImage(File(imageSource!.path));
-    } else {
+    } else if (userInfo!.data!.avatar != null) {
       return NetworkImage(userInfo!.data!.avatar!.toString());
+    } else {
+      return const AssetImage("assets/images/splash1.png");
     }
   }
 
@@ -243,7 +245,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                           Icons.logout,
                           color: Styles.errorRed,
                         ),
-                        Gap(AppLayout.getHeight(30)),
+                        Gap(AppLayout.getHeight(10)),
                         Text(
                           "Logout",
                           style: Styles.headLineStyle3

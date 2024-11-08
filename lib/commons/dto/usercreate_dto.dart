@@ -4,24 +4,24 @@
 
 import 'dart:convert';
 
-UserCreate userCreateFromJson(String str) => UserCreate.fromJson(json.decode(str));
+UserCreateDto userCreateFromJson(String str) => UserCreateDto.fromJson(json.decode(str));
 
-String userCreateToJson(UserCreate data) => json.encode(data.toJson());
+String userCreateToJson(UserCreateDto data) => json.encode(data.toJson());
 
-class UserCreate {
+class UserCreateDto {
     final String email;
     final String password;
     final String passwordConfirmation;
     final String name;
 
-    UserCreate({
+    UserCreateDto({
         required this.email,
         required this.password,
         required this.passwordConfirmation,
         required this.name,
     });
 
-    factory UserCreate.fromJson(Map<String, dynamic> json) => UserCreate(
+    factory UserCreateDto.fromJson(Map<String, dynamic> json) => UserCreateDto(
         email: json["email"],
         password: json["password"],
         passwordConfirmation: json["password_confirmation"],
