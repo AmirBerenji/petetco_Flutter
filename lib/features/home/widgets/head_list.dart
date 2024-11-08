@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:petetco/commons/utils/app_style.dart';
-import 'package:petetco/features/bottom_bar.dart';
 
 class HeadList extends StatelessWidget {
   const HeadList({
     super.key,
     required this.listText,
-    this.onTap,
+    this.onTap, this.isNotShow,
   });
   final String listText;
+  final bool?  isNotShow;  
   final void Function()? onTap;
 
   @override
@@ -20,12 +20,15 @@ class HeadList extends StatelessWidget {
           style: Styles.headLineStyle2,
         ),
         const Spacer(),
+        isNotShow ?? true?
+        const Text("")
+        :
         GestureDetector(
+          onTap: onTap ,
           child: Text(
             "View all",
             style: Styles.headLineStyleGreen4,
           ),
-          onTap: onTap ,
         )
       ],
     );

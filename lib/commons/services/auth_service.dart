@@ -1,7 +1,7 @@
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
 import 'package:petetco/commons/models/login_model.dart';
-import 'package:petetco/commons/models/usercreate_model.dart';
+import 'package:petetco/commons/dto/usercreate_dto.dart';
 import 'package:petetco/commons/models/userinfo_model.dart';
 import 'package:petetco/commons/models/userlogin_model.dart';
 import 'dart:convert';
@@ -37,34 +37,31 @@ class AuthService extends BasicService {
     }
   }
 
-  Future<void> Logout() async{
+  Future<void> Logout() async {
     await removeToken();
   }
 
-  Future<UserLogin> register(UserCreate userCreate) async {
+  Future<UserLogin> register(UserCreateDto userCreate) async {
     final url = Uri.parse('$baseUrl/register');
+    final headers = {
+      'Content-Type': 'application/json; charset=UTF-8',
+    };
+    final body = jsonEncode({
+      'email': userCreate.email,
+      'password': userCreate.password,
+      'password_confirmation': userCreate.passwordConfirmation,
+      'name': userCreate.name,
+    });
 
-    final response = await http.post(
-      url,
-      headers: <String, String>{
-        'Content-Type': 'application/json; charset=UTF-8',
-      },
-      body: jsonEncode(<String, String>{
-        'email': userCreate.email,
-        'password': userCreate.password,
-        'password_confirmation': userCreate.passwordConfirmation,
-        'name': userCreate.name
-      }),
-    );
+    final response = await http.post(url, headers: headers, body: body);
+    final user = UserLogin();
 
-    var user = new UserLogin();
     if (response.statusCode == 200) {
-      var user = userLoginFromJson(response.body);
-      saveToken(user.data!.token.toString());
-
-      return user;
+      final userData = userLoginFromJson(response.body);
+      saveToken(userData.data!.token.toString());
+      return userData;
     } else {
-      var errorMessage = jsonDecode(response.body);
+      final errorMessage = jsonDecode(response.body);
       user.message = errorMessage["message"];
       return user;
     }

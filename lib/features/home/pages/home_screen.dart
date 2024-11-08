@@ -11,6 +11,7 @@ import 'package:petetco/features/bottom_bar.dart';
 import 'package:petetco/features/home/widgets/head_list.dart';
 import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
 import 'package:petetco/features/pet/controllers/pet_provider.dart';
+import 'package:petetco/features/pet/pages/addpet_screen.dart';
 import 'package:petetco/features/pet/widgets/petcard.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
@@ -149,25 +150,53 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               //Your pet
               HeadList(
                 listText: "Your pets",
+                isNotShow:
+                    petListInfo?.data?.isNotEmpty ?? false ? false : true,
                 onTap: () {
                   BottomBar.mainPageKey.currentState?.navigateTo(1);
                 },
               ),
               Gap(AppLayout.getHeight(5)),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: petListInfo!.data!
-                      .take(3)
-                      .map((pet) => PetCard(
-                            e: pet,
-                            cardWidth: 350,
-                            padding:
-                                EdgeInsets.only(right: AppLayout.getHeight(10)),
-                          ))
-                      .toList(),
-                ),
-              ),
+              petListInfo?.data?.isNotEmpty ?? false
+                  ? SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: Row(
+                        children: petListInfo!.data!
+                            .take(3)
+                            .map((pet) => PetCard(
+                                  e: pet,
+                                  cardWidth: 350,
+                                  padding: EdgeInsets.only(
+                                      right: AppLayout.getHeight(10)),
+                                ))
+                            .toList(),
+                      ),
+                    )
+                  : GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const AddPetScreen()));
+                      },
+                      child: Container(
+                        width: 400,
+                        height: 100,
+                        decoration: const BoxDecoration(
+                            image: DecorationImage(
+                              image:  AssetImage("assets/images/addpet.png"),
+                              fit: BoxFit.cover),
+                            borderRadius:
+                                BorderRadius.all(Radius.circular(15))),
+                        child: const Padding(
+                          padding: EdgeInsets.all(8),
+                          child: Row(
+                            children: [],
+                          ),
+                        ),
+                      ),
+                    ),
+
               Gap(AppLayout.getHeight(20)),
 
               //PetShop part
