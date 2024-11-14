@@ -173,7 +173,7 @@ class _RegisterScreen extends ConsumerState<RegisterScreen> {
                               },
                               child: Text(
                                 "I have account",
-                                style: Styles.headLineStyle3,
+                                style: Styles.headLineStyle4,
                               ),
                             ),
                           ],

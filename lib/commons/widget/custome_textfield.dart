@@ -31,6 +31,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: AppLayout.getScreenWidth() * 0.9,
+      height: 55,
       decoration: BoxDecoration(
         color: Styles.bgColor,
         borderRadius:

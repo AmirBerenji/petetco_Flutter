@@ -28,13 +28,14 @@ class _ListPetScreenState extends ConsumerState<ListPetScreen>
 
   Future<void> _checkStatus() async {
     // Fetch user info asynchronously
-    final petList = await ref.read(petStateProvider.notifier).getAllPet();
+    final petList =  await ref.read(petStateProvider.notifier).getAllPet();
     // Update state when data is fetched
     setState(() {
       petListInfo = petList;
       isLoading = false;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {

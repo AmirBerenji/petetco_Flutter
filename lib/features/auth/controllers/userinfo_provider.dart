@@ -13,8 +13,9 @@ class UserInfoState extends _$UserInfoState {
     return new UserInfo();
   }
 
-  Future<UserInfo> userInfo() async{  
+  Future<UserInfo> userInfo() async{ 
     var user = await AuthService().userInfo();
+    state = user;
     return user;
   }
 
@@ -25,6 +26,7 @@ class UserInfoState extends _$UserInfoState {
 
   Future<bool> logoutProfile() async{
     await AuthService().Logout();
+    state = UserInfo();
     return true;
   }
 
