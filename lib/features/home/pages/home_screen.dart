@@ -8,7 +8,7 @@ import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/loading_dialog.dart';
 import 'package:petetco/features/auth/controllers/userinfo_provider.dart';
 import 'package:petetco/features/bottom_bar.dart';
-import 'package:petetco/features/home/widgets/head_list.dart';
+import 'package:petetco/commons/widget/head_list.dart';
 import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
 import 'package:petetco/features/pet/controllers/pet_provider.dart';
 import 'package:petetco/features/pet/pages/addpet_screen.dart';

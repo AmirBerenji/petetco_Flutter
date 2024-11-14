@@ -9,7 +9,7 @@ class Styles{
   static Color errorRed = Colors.red.shade700;
   static Color greenButton = green900;
   static Color orangeButton = orange900;
-  static Color bgPetBox = const Color(0xFFC9E8FF);
+  static Color bgPetBox = grey200;
 
   static Color green900 = const Color(0xFF157759); 
 
@@ -43,6 +43,11 @@ class Styles{
   static TextStyle headLineStyleGreen2 = TextStyle(fontSize: 21,color: green900,fontWeight: FontWeight.bold);
   static TextStyle headLineStyleGreen3 = TextStyle(fontSize: 17,color: green900,fontWeight: FontWeight.w500);
   static TextStyle headLineStyleGreen4 = TextStyle(fontSize: 14,color: green900,fontWeight: FontWeight.w300);
+
+  static TextStyle headLineStyleWhite1 = TextStyle(fontSize: 26,color: grey100,fontWeight: FontWeight.bold);
+  static TextStyle headLineStyleWhite2 = TextStyle(fontSize: 21,color: grey100,fontWeight: FontWeight.bold);
+  static TextStyle headLineStyleWhite3 = TextStyle(fontSize: 17,color: grey100,fontWeight: FontWeight.w500);
+  static TextStyle headLineStyleWhite4 = TextStyle(fontSize: 14,color: grey100,fontWeight: FontWeight.w300);
 
 
 

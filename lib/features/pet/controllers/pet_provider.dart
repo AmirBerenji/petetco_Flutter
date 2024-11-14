@@ -7,14 +7,14 @@ part 'pet_provider.g.dart';
 @riverpod
 class PetState extends _$PetState {
   @override 
-  String build(){
-    return "";
+  PetList build(){
+    return PetList();
   }
 
 
   Future<PetList> getAllPet() async {
     var petList = await PetService().getAllPet();
-
+    state = petList;
     return petList;
   }
 

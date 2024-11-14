@@ -130,7 +130,7 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                               onTap: () {},
                               child: Text(
                                 "Forgot password!",
-                                style: Styles.headLineStyle3,
+                                style: Styles.headLineStyle4,
                               ),
                             ),
                             GestureDetector(
@@ -143,7 +143,7 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                               },
                               child: Text(
                                 "Create account",
-                                style: Styles.headLineStyle3,
+                                style: Styles.headLineStyle4,
                               ),
                             ),
                           ],
