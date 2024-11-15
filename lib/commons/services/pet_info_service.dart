@@ -42,7 +42,6 @@ class PetInfoService extends BasicService {
     }
   }
 
-
    Future<ColorList> getAllPetColor() async {
     var token = await getToken();
 

@@ -6,6 +6,7 @@ import 'package:petetco/commons/models/pet_model.dart';
 import 'package:petetco/commons/utils/app_layout.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/head_list.dart';
+import 'package:petetco/features/pet/pages/petaddheight_screen.dart';
 import 'package:petetco/features/pet/pages/petaddweight_screen.dart';
 import 'package:petetco/features/pet/widgets/petcard.dart';
 
@@ -51,13 +52,18 @@ class PetProfileScreen extends StatelessWidget {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => PetAddWeightScreen()));
+                                  builder: (context) => PetAddWeightScreen(
+                                        petId: e.id!,
+                                      )));
                         },
                         child: Container(
                           width: AppLayout.getWidth(170),
                           height: AppLayout.getHeight(150),
                           decoration: BoxDecoration(
-                            image: DecorationImage(image: AssetImage('assets/images/scales2.jpg'),fit: BoxFit.cover),
+                              image: DecorationImage(
+                                  image:
+                                      AssetImage('assets/images/scales2.jpg'),
+                                  fit: BoxFit.cover),
                               borderRadius: BorderRadius.all(
                                   Radius.circular(AppLayout.getHeight(10))),
                               color: Styles.grey400,
@@ -65,14 +71,27 @@ class PetProfileScreen extends StatelessWidget {
                         ),
                       ),
                       Spacer(),
-                      Container(
-                        width: AppLayout.getWidth(170),
-                        height: AppLayout.getHeight(150),
-                        decoration: BoxDecoration(
-                           image: DecorationImage(image: AssetImage('assets/images/meter.jpg'),fit: BoxFit.cover),
-                            borderRadius: BorderRadius.all(Radius.circular(10)),
-                            color: Styles.grey400,
-                            border: Border.all(color: Styles.grey200)),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PetAddHeightScreen(
+                                        petId: e.id!,
+                                      )));
+                        },
+                        child: Container(
+                          width: AppLayout.getWidth(170),
+                          height: AppLayout.getHeight(150),
+                          decoration: BoxDecoration(
+                              image: DecorationImage(
+                                  image: AssetImage('assets/images/meter.jpg'),
+                                  fit: BoxFit.cover),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10)),
+                              color: Styles.grey400,
+                              border: Border.all(color: Styles.grey200)),
+                        ),
                       ),
                     ],
                   ),

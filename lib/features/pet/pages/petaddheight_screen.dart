@@ -14,20 +14,20 @@ import 'package:petetco/commons/widget/head_list.dart';
 import 'package:petetco/commons/widget/loading_dialog.dart';
 import 'package:petetco/features/pet/controllers/pet_provider.dart';
 
-class PetAddWeightScreen extends ConsumerStatefulWidget {
-  const PetAddWeightScreen({super.key, required this.petId});
+class PetAddHeightScreen extends ConsumerStatefulWidget {
+  const PetAddHeightScreen({super.key, required this.petId});
   final int petId;
 
   @override
-  ConsumerState<PetAddWeightScreen> createState() => _PetAddWeightScreenState();
+  ConsumerState<PetAddHeightScreen> createState() => _PetAddHeightScreenState();
 }
 
-class _PetAddWeightScreenState extends ConsumerState<PetAddWeightScreen> {
+class _PetAddHeightScreenState extends ConsumerState<PetAddHeightScreen> {
   final TextEditingController _date = TextEditingController();
-  final TextEditingController _weight = TextEditingController();
+  final TextEditingController _height = TextEditingController();
 
 bool isLoading = true;
-List<PetWeight> petweight = [];
+List<PetWeight> petHeight = [];
 
 @override
   void initState() {
@@ -38,10 +38,10 @@ List<PetWeight> petweight = [];
 
 Future<void> _checkStatus() async {
     // Fetch user info asynchronously
-    final listPetWeight =  await ref.read(petStateProvider.notifier).getAllPetWeight(widget.petId);
+    final listPetHeight =  await ref.read(petStateProvider.notifier).getAllPetHeight(widget.petId);
     // Update state when data is fetched
     setState(() {
-      petweight = listPetWeight;
+      petHeight = listPetHeight;
       isLoading = false;
     });
   }
@@ -57,7 +57,7 @@ Future<void> _checkStatus() async {
     return Scaffold(
       backgroundColor: Styles.bgColor,
       appBar: AppBar(
-        title: Text('Add Weight'),
+        title: Text('Add Height'),
       ),
       body: Padding(
         padding: EdgeInsets.all(10),
@@ -67,7 +67,7 @@ Future<void> _checkStatus() async {
               children: [
                 Gap(10),
                 CustomTextField(
-                  hintText: "Date of weight",
+                  hintText: "Date of height",
                   onTap: () {
                     DatePicker.showDatePicker(context,
                         showTitleActions: true,
@@ -85,8 +85,8 @@ Future<void> _checkStatus() async {
                 ),
                 Gap(20),
                 CustomTextField(
-                  hintText: 'Weight',
-                  controller: _weight,
+                  hintText: 'Height',
+                  controller: _height,
                   keyboardType: TextInputType.number,
                 ),
                 Gap(20),
@@ -96,9 +96,9 @@ Future<void> _checkStatus() async {
                         CustomAwesomeDialog(
                             context, "Please select date", DialogType.error);
                         return;
-                      } else if (_weight.text == "" ||
-                          _weight.text == null ||
-                          _weight.text == "0") {
+                      } else if (_height.text == "" ||
+                          _height.text == null ||
+                          _height.text == "0") {
                         CustomAwesomeDialog(context, "Please write the weight",
                             DialogType.error);
                         return;
@@ -107,7 +107,7 @@ Future<void> _checkStatus() async {
                       var model = PetWeightAddDto(
                           petId: widget.petId,
                           date: _date.text,
-                          weight: double.parse(_weight.text));
+                          weight: double.parse(_height.text));
                       await ref
                           .read(petStateProvider.notifier)
                           .addweight(model);
