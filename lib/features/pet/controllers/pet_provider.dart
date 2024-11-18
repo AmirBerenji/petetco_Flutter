@@ -30,9 +30,9 @@ class PetState extends _$PetState {
     return result;
   }
 
-  Future<List<PetWeight>> getAllPetWeight(int petId)
+  Future<List<PetWeight>> getAllPetWeight(Map<String,dynamic> data)
   async {
-    var result = await PetService().getPetWeight(petId);
+    var result = await PetService().getPetWeight(data);
     if(result.data != null){ 
       return result.data!.toList();
     }
