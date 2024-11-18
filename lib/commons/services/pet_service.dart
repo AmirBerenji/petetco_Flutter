@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:petetco/commons/dto/petAddWeight_dto.dart';
 import 'package:petetco/commons/dto/petAdd_dto.dart';
 import 'package:petetco/commons/dto/petWeightList_dto.dart';
+import 'package:petetco/commons/helper/public_method.dart';
 import 'package:petetco/commons/models/petlist_model.dart';
 import 'package:petetco/commons/services/basic_service.dart';
 import 'package:http/http.dart' as http;
@@ -93,19 +94,20 @@ class PetService extends BasicService {
     return false;
   }
 
-  Future<PetWeightListDto> getPetWeight(int petId) async {
+  Future<PetWeightListDto> getPetWeight(Map<String,dynamic> data) async {
+
+    String queryString = PublicMethod.convertGetApiParam(data);
+
     var token = await getToken();
-    final url = Uri.parse('$baseUrl/weight');
+    final url = Uri.parse('$baseUrl/weight$queryString');
+
 
     var request = http.MultipartRequest('GET', url)
       ..headers['Authorization'] = 'Bearer $token'
       ..headers['Accept'] = 'application/json';
 
-    final body = jsonEncode({
-      'pet_id': petId
-    });
 
-    final response = await http.post(url, headers: request.headers, body: body);
+    final response = await http.get(url, headers: request.headers);
 
     if (response.statusCode == 200) {
        var listPetWeight = petWeightListDtoFromJson(response.body);

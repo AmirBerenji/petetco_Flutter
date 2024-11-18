@@ -38,7 +38,8 @@ List<PetWeight> petweight = [];
 
 Future<void> _checkStatus() async {
     // Fetch user info asynchronously
-    final listPetWeight =  await ref.read(petStateProvider.notifier).getAllPetWeight(widget.petId);
+    Map<String, dynamic> data = {"pet_id": widget.petId};
+    final listPetWeight =  await ref.read(petStateProvider.notifier).getAllPetWeight(data);
     // Update state when data is fetched
     setState(() {
       petweight = listPetWeight;
@@ -94,13 +95,13 @@ Future<void> _checkStatus() async {
                     onTap: () async {
                       if (_date.text == "" || _date.text == null) {
                         CustomAwesomeDialog(
-                            context, "Please select date", DialogType.error);
+                            context, "Please select date", DialogType.error).show();
                         return;
                       } else if (_weight.text == "" ||
                           _weight.text == null ||
                           _weight.text == "0") {
                         CustomAwesomeDialog(context, "Please write the weight",
-                            DialogType.error);
+                            DialogType.error).show();
                         return;
                       }
 
@@ -123,7 +124,18 @@ Future<void> _checkStatus() async {
                 Gap(AppLayout.getHeight(20)),
                 Divider(),
                 HeadList(listText: 'History'),
-                Gap(AppLayout.getHeight(20)),
+                Gap(AppLayout.getHeight(5)),
+                Column(
+                  children: petweight.map((e) => Row(
+                    children: [
+                      Gap(20),
+                      Text(e.date.toString().substring(0,11) +": "),
+                      Gap(5),
+                      Text(e.weight.toString())
+                    ],
+                  )).toList(),
+                )
+                
               ],
             )
           ],
