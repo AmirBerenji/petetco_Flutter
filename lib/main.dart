@@ -39,9 +39,9 @@ class _MyAppState extends State<MyApp> {
         status == InternetStatus.connected;
       });
       if (status == InternetStatus.connected) {
-        print('Connected to the internet');
+        //print('Connected to the internet');
       } else {
-        print('No internet connection');
+        //print('No internet connection');
         scaffoldMessengerKey.currentState?.showSnackBar(
           SnackBar(
             backgroundColor: Styles.errorRed,

@@ -1,11 +1,12 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:chart_sparkline/chart_sparkline.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:petetco/commons/dto/petAddWeight_dto.dart';
-import 'package:petetco/commons/models/petWeight_model.dart';
+import 'package:petetco/commons/models/petHeight_model.dart';
 import 'package:petetco/commons/utils/app_layout.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/custom_btn.dart';
@@ -28,7 +29,7 @@ class _PetAddHeightScreenState extends ConsumerState<PetAddHeightScreen> {
   final TextEditingController _height = TextEditingController();
 
   bool isLoading = true;
-  List<PetWeight> petHeight = [];
+  List<PetHeight> petHeight = [];
 
   @override
   void initState() {
@@ -129,25 +130,29 @@ class _PetAddHeightScreenState extends ConsumerState<PetAddHeightScreen> {
                     )),
                 Gap(AppLayout.getHeight(20)),
                 const Divider(),
-              const HeadList(listText: 'Chart'),
+                const HeadList(listText: 'Chart'),
                 Gap(AppLayout.getHeight(5)),
                 Center(
-                  child: Container(
-                    width: 300.0,
+                  child: SizedBox(
+                    width: AppLayout.getScreenWidth()*0.8,
                     height: 100.0,
                     child: Sparkline(
-                      data: petHeight
-                          .map((e) => e.weight?.toDouble() ?? 0.0)
+                      data: petHeight.reversed
+                          .map((e) => e.height?.toDouble() ?? 0.0)
                           .toList(),
                       lineColor: Styles.green900,
+                      averageLabel: kFlutterMemoryAllocationsEnabled,
                       gridLineColor: Colors.green,
+                      pointColor: Colors.red ,
+                      pointsMode: PointsMode.all,
+                      pointSize: 8,
                       gridLinesEnable: true,
                       gridLineLabelPrecision: 1,
                       gridLineLabelFixed: true,
                     ),
                   ),
                 ),
-                Gap(AppLayout.getHeight(15)), 
+                Gap(AppLayout.getHeight(15)),
                 const HeadList(listText: 'History'),
                 Gap(AppLayout.getHeight(5)),
                 Column(
@@ -155,9 +160,9 @@ class _PetAddHeightScreenState extends ConsumerState<PetAddHeightScreen> {
                       .map((e) => Row(
                             children: [
                               Gap(AppLayout.getHeight(20)),
-                              Text("${e.date.toString().substring(0, 11)}: "),
+                              Text("${e.date.toString()}: "),
                               Gap(AppLayout.getHeight(5)),
-                              Text(e.weight.toString())
+                              Text(e.height.toString())
                             ],
                           ))
                       .toList(),

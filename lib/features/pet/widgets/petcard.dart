@@ -80,10 +80,9 @@ class PetCard extends StatelessWidget {
                               const Gap(10),
                               Text(
                                 e.breed!.name!.length >= 15
-                                    ? e.breed!.name
+                                    ? "${e.breed!.name
                                             .toString()
-                                            .substring(0, 15) +
-                                        "..."
+                                            .substring(0, 15)}..."
                                     : e.breed!.name.toString(),
                                 style: Styles.headLineStyleGreen3,
                               ),

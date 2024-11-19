@@ -1,5 +1,6 @@
 import 'package:petetco/commons/dto/petAddWeight_dto.dart';
 import 'package:petetco/commons/dto/petAdd_dto.dart';
+import 'package:petetco/commons/models/petHeight_model.dart';
 import 'package:petetco/commons/models/petWeight_model.dart';
 import 'package:petetco/commons/models/petlist_model.dart';
 import 'package:petetco/commons/services/pet_service.dart';
@@ -42,7 +43,7 @@ class PetState extends _$PetState {
     return result;
   }
 
-  Future<List<PetWeight>> getAllPetHeight(Map<String, dynamic> data) async {
+  Future<List<PetHeight>> getAllPetHeight(Map<String, dynamic> data) async {
     var result = await PetService().getPetHeight(data);
     if (result.data != null) {
       return result.data!.toList();
