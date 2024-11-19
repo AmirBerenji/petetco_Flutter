@@ -135,8 +135,8 @@ class _PetAddWeightScreenState extends ConsumerState<PetAddWeightScreen>
                 const HeadList(listText: 'Chart'),
                 Gap(AppLayout.getHeight(5)),
                 Center(
-                  child: Container(
-                    width: 300.0,
+                  child: SizedBox(
+                    width: AppLayout.getScreenWidth()*0.8,
                     height: 100.0,
                     child: Sparkline(
                       data: petweight.reversed
@@ -144,6 +144,9 @@ class _PetAddWeightScreenState extends ConsumerState<PetAddWeightScreen>
                           .toList(),
                       lineColor: Styles.green900,
                       gridLineColor: Colors.green,
+                      pointColor: Colors.red ,
+                      pointsMode: PointsMode.all,
+                      pointSize: 8,
                       gridLinesEnable: true,
                       gridLineLabelPrecision: 1,
                       gridLineLabelFixed: true,

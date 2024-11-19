@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:petetco/commons/dto/petAddWeight_dto.dart';
 import 'package:petetco/commons/dto/petAdd_dto.dart';
+import 'package:petetco/commons/dto/petHeightList_dto.dart';
 import 'package:petetco/commons/dto/petWeightList_dto.dart';
 import 'package:petetco/commons/helper/public_method.dart';
 import 'package:petetco/commons/models/petlist_model.dart';
@@ -137,7 +138,7 @@ class PetService extends BasicService {
     return false;
   }
 
-  Future<PetWeightListDto> getPetHeight(Map<String, dynamic> data) async {
+  Future<PetHeightListDto> getPetHeight(Map<String, dynamic> data) async {
     String queryString = PublicMethod.convertGetApiParam(data);
 
     var token = await getToken();
@@ -150,10 +151,10 @@ class PetService extends BasicService {
     final response = await http.get(url, headers: request.headers);
 
     if (response.statusCode == 200) {
-      var listPetWeight = petWeightListDtoFromJson(response.body);
-      return listPetWeight;
+      var listPetHeight = petHeightListDtoFromJson(response.body);
+      return listPetHeight;
     }
 
-    return PetWeightListDto();
+    return PetHeightListDto();
   }
 }

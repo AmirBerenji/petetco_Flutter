@@ -291,7 +291,7 @@ class _AddPetScreenState extends ConsumerState<AddPetScreen> {
                         hintText: "Search Please",
                         hintStyle: Styles.headLineStyle3
                             .copyWith(color: Styles.grey500),
-                        suffixIcon: Icon(Icons.search),
+                        suffixIcon: const Icon(Icons.search),
                       ),
                     ),
                     showSearchBox: true,

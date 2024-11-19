@@ -23,7 +23,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
   void initState() {
     super.initState();
     //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
-    SharedStorage storage  = new SharedStorage();
+    SharedStorage storage  = SharedStorage();
     Future.delayed(const Duration(seconds: 3),() async {
 
         var token = await storage.getValue('token');
@@ -74,7 +74,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     return Scaffold(
       body: Stack(
         children: [
-         Container(
+         SizedBox(
           width: 500,
           
           child:Column(
@@ -90,9 +90,9 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text("Welcome",style: Styles.headLineStyle1.copyWith(color: Styles.grey100,fontSize: 50)),
-                    Gap(10),
+                    Gap(AppLayout.getHeight(10)),
                     Text("to",style: Styles.headLineStyle1.copyWith(color: Styles.grey100,fontSize: 40)),
-                    Gap(10),
+                    Gap(AppLayout.getHeight(10)),
                     Text("PETET CO",style: Styles.headLineStyle1.copyWith(color: Styles.grey100,fontSize: 60)),
                   ],
                 ),
@@ -104,7 +104,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
          ),
          
        
-        PictureAnimation()
+        const PictureAnimation()
         ],
       ),
     );
