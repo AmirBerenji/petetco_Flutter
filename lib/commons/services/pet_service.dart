@@ -94,30 +94,27 @@ class PetService extends BasicService {
     return false;
   }
 
-  Future<PetWeightListDto> getPetWeight(Map<String,dynamic> data) async {
-
+  Future<PetWeightListDto> getPetWeight(Map<String, dynamic> data) async {
     String queryString = PublicMethod.convertGetApiParam(data);
 
     var token = await getToken();
     final url = Uri.parse('$baseUrl/weight$queryString');
 
-
     var request = http.MultipartRequest('GET', url)
       ..headers['Authorization'] = 'Bearer $token'
       ..headers['Accept'] = 'application/json';
 
-
     final response = await http.get(url, headers: request.headers);
 
     if (response.statusCode == 200) {
-       var listPetWeight = petWeightListDtoFromJson(response.body);
-       return listPetWeight;
+      var listPetWeight = petWeightListDtoFromJson(response.body);
+      return listPetWeight;
     }
 
     return PetWeightListDto();
   }
 
-  Future<bool> addPetHeight(PetWeightAddDto model, int aaa) async {
+  Future<bool> addPetHeight(PetWeightAddDto model) async {
     var token = await getToken();
     final url = Uri.parse('$baseUrl/height');
 
@@ -139,29 +136,24 @@ class PetService extends BasicService {
 
     return false;
   }
-  
-  Future<PetWeightListDto> getPetHeight(int petId) async {
+
+  Future<PetWeightListDto> getPetHeight(Map<String, dynamic> data) async {
+    String queryString = PublicMethod.convertGetApiParam(data);
+
     var token = await getToken();
-    final url = Uri.parse('$baseUrl/height');
+    final url = Uri.parse('$baseUrl/height$queryString');
 
     var request = http.MultipartRequest('GET', url)
       ..headers['Authorization'] = 'Bearer $token'
       ..headers['Accept'] = 'application/json';
 
-    final body = jsonEncode({
-      'pet_id': petId
-    });
-
-    final response = await http.post(url, headers: request.headers, body: body);
+    final response = await http.get(url, headers: request.headers);
 
     if (response.statusCode == 200) {
-       var listPetHeight = petWeightListDtoFromJson(response.body);
-       return listPetHeight;
+      var listPetWeight = petWeightListDtoFromJson(response.body);
+      return listPetWeight;
     }
 
     return PetWeightListDto();
   }
-
-
-
 }

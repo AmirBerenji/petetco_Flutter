@@ -25,25 +25,26 @@ class PetState extends _$PetState {
   }
 
   Future<bool> addweight(PetWeightAddDto model) async {
-    
     var result = await PetService().addPetWeight(model);
     return result;
   }
 
-  Future<List<PetWeight>> getAllPetWeight(Map<String,dynamic> data)
-  async {
+  Future<List<PetWeight>> getAllPetWeight(Map<String, dynamic> data) async {
     var result = await PetService().getPetWeight(data);
-    if(result.data != null){ 
+    if (result.data != null) {
       return result.data!.toList();
     }
     return [];
   }
 
+  Future<bool> addHeight(PetWeightAddDto model) async {
+    var result = await PetService().addPetHeight(model);
+    return result;
+  }
 
-  Future<List<PetWeight>> getAllPetHeight(int petId)
-  async {
-    var result = await PetService().getPetHeight(petId);
-    if(result.data != null){ 
+  Future<List<PetWeight>> getAllPetHeight(Map<String, dynamic> data) async {
+    var result = await PetService().getPetHeight(data);
+    if (result.data != null) {
       return result.data!.toList();
     }
     return [];
