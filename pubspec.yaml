@@ -31,7 +31,7 @@ dependencies:
   flutter_datetime_picker_plus: ^2.2.0
   dropdown_search: ^5.0.6
   internet_connection_checker_plus:
-
+  chart_sparkline: ^1.1.1
   
 
 dev_dependencies:
@@ -40,8 +40,8 @@ dev_dependencies:
 
   flutter_lints: ^4.0.0
   flutter_native_splash: ^2.2.19
-  build_runner:
-  riverpod_generator:
+  build_runner: ^2.4.11
+  riverpod_generator: ^2.4.0 
 
 
 flutter_native_splash:

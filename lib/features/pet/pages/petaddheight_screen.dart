@@ -1,4 +1,5 @@
 import 'package:awesome_dialog/awesome_dialog.dart';
+import 'package:chart_sparkline/chart_sparkline.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker_plus/flutter_datetime_picker_plus.dart';
 import 'package:gap/gap.dart';
@@ -26,19 +27,20 @@ class _PetAddHeightScreenState extends ConsumerState<PetAddHeightScreen> {
   final TextEditingController _date = TextEditingController();
   final TextEditingController _height = TextEditingController();
 
-bool isLoading = true;
-List<PetWeight> petHeight = [];
+  bool isLoading = true;
+  List<PetWeight> petHeight = [];
 
-@override
+  @override
   void initState() {
     super.initState();
     _checkStatus();
   }
 
-
-Future<void> _checkStatus() async {
+  Future<void> _checkStatus() async {
     // Fetch user info asynchronously
-    final listPetHeight =  await ref.read(petStateProvider.notifier).getAllPetHeight(widget.petId);
+    Map<String, dynamic> data = {"pet_id": widget.petId};
+    final listPetHeight =
+        await ref.read(petStateProvider.notifier).getAllPetHeight(data);
     // Update state when data is fetched
     setState(() {
       petHeight = listPetHeight;
@@ -46,26 +48,49 @@ Future<void> _checkStatus() async {
     });
   }
 
+  Future<void> _saveData() async {
+    if (_date.text == "" || _date.text == null) {
+      CustomAwesomeDialog(context, "Please select date", DialogType.error)
+          .show();
+      return;
+    } else if (_height.text == "" ||
+        _height.text == null ||
+        _height.text == "0") {
+      CustomAwesomeDialog(context, "Please write the height", DialogType.error)
+          .show();
+      return;
+    }
+
+    var model = PetWeightAddDto(
+        petId: widget.petId,
+        date: _date.text,
+        weight: double.parse(_height.text));
+    await ref.read(petStateProvider.notifier).addHeight(model);
+
+    setState(() {
+      _checkStatus();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     AppLayout.getSize(context);
-  if (isLoading) {
+    if (isLoading) {
       return const LoadingDialog();
     }
-  
+
     return Scaffold(
       backgroundColor: Styles.bgColor,
       appBar: AppBar(
-        title: Text('Add Height'),
+        title: const Text('Add Height'),
       ),
       body: Padding(
-        padding: EdgeInsets.all(10),
+        padding: EdgeInsets.all(AppLayout.getHeight(10)),
         child: ListView(
           children: [
             Column(
               children: [
-                Gap(10),
+                Gap(AppLayout.getHeight(10)),
                 CustomTextField(
                   hintText: "Date of height",
                   onTap: () {
@@ -83,34 +108,16 @@ Future<void> _checkStatus() async {
                   keyboardType: TextInputType.none,
                   textInputAction: TextInputAction.next,
                 ),
-                Gap(20),
+                Gap(AppLayout.getHeight(20)),
                 CustomTextField(
                   hintText: 'Height',
                   controller: _height,
                   keyboardType: TextInputType.number,
                 ),
-                Gap(20),
+                Gap(AppLayout.getHeight(20)),
                 CustomButton(
                     onTap: () async {
-                      if (_date.text == "" || _date.text == null) {
-                        CustomAwesomeDialog(
-                            context, "Please select date", DialogType.error);
-                        return;
-                      } else if (_height.text == "" ||
-                          _height.text == null ||
-                          _height.text == "0") {
-                        CustomAwesomeDialog(context, "Please write the weight",
-                            DialogType.error);
-                        return;
-                      }
-
-                      var model = PetWeightAddDto(
-                          petId: widget.petId,
-                          date: _date.text,
-                          weight: double.parse(_height.text));
-                      await ref
-                          .read(petStateProvider.notifier)
-                          .addweight(model);
+                      await _saveData();
                     },
                     width: AppLayout.getScreenHeight() * 0.9,
                     height: AppLayout.getHeight(50),
@@ -121,9 +128,40 @@ Future<void> _checkStatus() async {
                       style: Styles.headLineStyleWhite3,
                     )),
                 Gap(AppLayout.getHeight(20)),
-                Divider(),
-                HeadList(listText: 'History'),
-                Gap(AppLayout.getHeight(20)),
+                const Divider(),
+              const HeadList(listText: 'Chart'),
+                Gap(AppLayout.getHeight(5)),
+                Center(
+                  child: Container(
+                    width: 300.0,
+                    height: 100.0,
+                    child: Sparkline(
+                      data: petHeight
+                          .map((e) => e.weight?.toDouble() ?? 0.0)
+                          .toList(),
+                      lineColor: Styles.green900,
+                      gridLineColor: Colors.green,
+                      gridLinesEnable: true,
+                      gridLineLabelPrecision: 1,
+                      gridLineLabelFixed: true,
+                    ),
+                  ),
+                ),
+                Gap(AppLayout.getHeight(15)), 
+                const HeadList(listText: 'History'),
+                Gap(AppLayout.getHeight(5)),
+                Column(
+                  children: petHeight
+                      .map((e) => Row(
+                            children: [
+                              Gap(AppLayout.getHeight(20)),
+                              Text("${e.date.toString().substring(0, 11)}: "),
+                              Gap(AppLayout.getHeight(5)),
+                              Text(e.weight.toString())
+                            ],
+                          ))
+                      .toList(),
+                )
               ],
             )
           ],
