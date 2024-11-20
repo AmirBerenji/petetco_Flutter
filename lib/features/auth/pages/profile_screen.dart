@@ -11,6 +11,7 @@ import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/custom_btn.dart';
 import 'package:petetco/commons/widget/loading_dialog.dart';
 import 'package:petetco/features/auth/controllers/userinfo_provider.dart';
+import 'package:petetco/features/auth/pages/changepassword_screen.dart';
 import 'package:petetco/features/auth/pages/login_screen.dart';
 import 'package:petetco/features/auth/widgets/custom_profile_label.dart';
 import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
@@ -187,25 +188,30 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   ),
                   const Divider(),
                   Gap(AppLayout.getHeight(10)),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.password,
-                        color: Styles.grey800,
-                      ),
-                      Gap(AppLayout.getHeight(10)),
-                      Text(
-                        "Change Password",
-                        style: Styles.headLineStyle3
-                            .copyWith(color: Styles.grey800),
-                      ),
-                      const Spacer(),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Styles.grey800,
-                        size: 15,
-                      )
-                    ],
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePasswordScreen()));
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.password,
+                          color: Styles.grey800,
+                        ),
+                        Gap(AppLayout.getHeight(10)),
+                        Text(
+                          "Change Password",
+                          style: Styles.headLineStyle3
+                              .copyWith(color: Styles.grey800),
+                        ),
+                        const Spacer(),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Styles.grey800,
+                          size: 15,
+                        )
+                      ],
+                    ),
                   ),
                   Gap(AppLayout.getHeight(30)),
                   Row(

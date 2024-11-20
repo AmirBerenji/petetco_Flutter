@@ -35,7 +35,7 @@ class PetCard extends StatelessWidget {
           decoration: BoxDecoration(
               color: Styles.bgPetBox,
               borderRadius: const BorderRadius.all(Radius.circular(15)),
-              border: Border.all(width: 1, color: Styles.grey400)),
+              border: Border.all(width: 1, color: Styles.bgColor)),
           child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
