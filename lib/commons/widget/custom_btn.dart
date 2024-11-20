@@ -8,7 +8,8 @@ class CustomButton extends StatelessWidget {
                       required this.height, 
                       this.color, 
                       required this.borderColor, 
-                      required this.text,  this.icon });
+                      required this.text,  this.icon, 
+                      this.isDrabble });
 
   final void Function()? onTap;
   final double width;
@@ -17,10 +18,31 @@ class CustomButton extends StatelessWidget {
   final Color borderColor;
   final Text text;
   final Icon? icon;
+  final bool? isDrabble;
 
 
   @override
   Widget build(BuildContext context) {
+
+    if (isDrabble == true)
+    {
+      return ElevatedButton(
+        onPressed: onTap,
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          
+        ),
+        child: SizedBox(
+            width: width,
+            height: height,
+            child: Center(
+                child: text)));
+
+    } else
+    {
+    
+    
+    
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -43,5 +65,6 @@ class CustomButton extends StatelessWidget {
         ),
       ),
     );
+    }
   }
 }

@@ -9,7 +9,7 @@ class Styles{
   static Color errorRed = Colors.red.shade700;
   static Color greenButton = green900;
   static Color orangeButton = orange900;
-  static Color bgPetBox = grey200;
+  static Color bgPetBox = const Color(0xffedddc6);
 
   static Color green900 = const Color(0xFF157759); 
 

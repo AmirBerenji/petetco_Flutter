@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:petetco/commons/dto/userchangepassword_dto.dart';
 import 'package:petetco/commons/models/login_model.dart';
 import 'package:petetco/commons/dto/usercreate_dto.dart';
 import 'package:petetco/commons/models/userinfo_model.dart';
@@ -109,6 +110,27 @@ class AuthService extends BasicService {
     }
 
     // Send the request
+    final response = await request.send();
+
+    // Check the response status
+    if (response.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  Future<bool> updatePassword(UserChangePasswordDto model) async {
+    var token = await getToken();
+    final url = Uri.parse('$baseUrl/profile/update-password');
+    
+     var request = http.MultipartRequest('POST', url)
+      ..headers['Authorization'] = 'Bearer $token'
+      ..headers['Accept'] = 'application/json';
+
+    request.fields['current_password'] = model.currentPassword;
+    request.fields['password'] = model.newPassword;
+    request.fields['password_confirmation'] = model.confirmNewPassword;
     final response = await request.send();
 
     // Check the response status
