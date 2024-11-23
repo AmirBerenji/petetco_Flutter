@@ -18,12 +18,12 @@ class UserLogin {
     });
 
     factory UserLogin.fromJson(Map<String, dynamic> json) => UserLogin(
-        data: Data.fromJson(json["data"]),
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
         message: json["message"],
     );
 
     Map<String, dynamic> toJson() => {
-        "data": data!.toJson(),
+        "data": data?.toJson(),
         "message": message,
     };
 }
@@ -33,7 +33,10 @@ class Data {
     String? name;
     String? avatar;
     String? email;
+    String? phone;
     bool? emailVerified;
+    String? address;
+    AddressLocation? addressLocation;
     String? token;
 
     Data({
@@ -41,7 +44,10 @@ class Data {
         this.name,
         this.avatar,
         this.email,
+        this.phone,
         this.emailVerified,
+        this.address,
+        this.addressLocation,
         this.token,
     });
 
@@ -50,7 +56,10 @@ class Data {
         name: json["name"],
         avatar: json["avatar"],
         email: json["email"],
+        phone: json["phone"],
         emailVerified: json["email_verified"],
+        address: json["address"],
+        addressLocation: json["address_location"] == null ? null : AddressLocation.fromJson(json["address_location"]),
         token: json["token"],
     );
 
@@ -59,7 +68,30 @@ class Data {
         "name": name,
         "avatar": avatar,
         "email": email,
+        "phone": phone,
         "email_verified": emailVerified,
+        "address": address,
+        "address_location": addressLocation?.toJson(),
         "token": token,
+    };
+}
+
+class AddressLocation {
+    double? lat;
+    double? lng;
+
+    AddressLocation({
+        this.lat,
+        this.lng,
+    });
+
+    factory AddressLocation.fromJson(Map<String, dynamic> json) => AddressLocation(
+        lat: json["lat"]?.toDouble(),
+        lng: json["lng"]?.toDouble(),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "lat": lat,
+        "lng": lng,
     };
 }

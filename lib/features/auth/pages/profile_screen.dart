@@ -12,6 +12,7 @@ import 'package:petetco/commons/widget/custom_btn.dart';
 import 'package:petetco/commons/widget/loading_dialog.dart';
 import 'package:petetco/features/auth/controllers/userinfo_provider.dart';
 import 'package:petetco/features/auth/pages/changepassword_screen.dart';
+import 'package:petetco/features/auth/pages/editprofile_screen.dart';
 import 'package:petetco/features/auth/pages/login_screen.dart';
 import 'package:petetco/features/auth/widgets/custom_profile_label.dart';
 import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
@@ -23,7 +24,7 @@ class ProfileScreen extends ConsumerStatefulWidget {
   ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends ConsumerState<ProfileScreen> {
+class _ProfileScreenState extends ConsumerState<ProfileScreen>  with TickerProviderStateMixin{
   final ImagePicker _picker = ImagePicker();
   UserInfo? userInfo;
   bool isLoading = true;
@@ -180,7 +181,7 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     lable: "Address: ",
                     val: userInfo?.data?.address ?? "N/A",
                   ),
-                  Gap(AppLayout.getHeight(30)),
+                  Gap(AppLayout.getHeight(40)),
                   Text(
                     "Setting",
                     style: Styles.headLineStyle4.copyWith(
@@ -189,8 +190,11 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                   const Divider(),
                   Gap(AppLayout.getHeight(10)),
                   GestureDetector(
-                    onTap: (){
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => ChangePasswordScreen()));
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChangePasswordScreen()));
                     },
                     child: Row(
                       children: [
@@ -214,25 +218,33 @@ class _ProfileScreenState extends ConsumerState<ProfileScreen> {
                     ),
                   ),
                   Gap(AppLayout.getHeight(30)),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.info,
-                        color: Styles.grey800,
-                      ),
-                      Gap(AppLayout.getHeight(10)),
-                      Text(
-                        "Update Info",
-                        style: Styles.headLineStyle3
-                            .copyWith(color: Styles.grey800),
-                      ),
-                      const Spacer(),
-                      Icon(
-                        Icons.arrow_forward_ios,
-                        color: Styles.grey800,
-                        size: 15,
-                      )
-                    ],
+                  GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => EditProfileScreen()));
+                    },
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.info,
+                          color: Styles.grey800,
+                        ),
+                        Gap(AppLayout.getHeight(10)),
+                        Text(
+                          "Update Profile Info",
+                          style: Styles.headLineStyle3
+                              .copyWith(color: Styles.grey800),
+                        ),
+                        const Spacer(),
+                        Icon(
+                          Icons.arrow_forward_ios,
+                          color: Styles.grey800,
+                          size: 15,
+                        )
+                      ],
+                    ),
                   ),
                   Gap(AppLayout.getHeight(30)),
                   GestureDetector(
