@@ -36,6 +36,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   Future<void> _checkStatus() async {
     // Fetch user info asynchronously
     final res = await ref.read(userInfoStateProvider.notifier).userInfo();
+    ref.read(userInfoStateProvider.notifier).setUserInfo(res);
     final petList = await ref.read(petStateProvider.notifier).getAllPet();
     // Update state when data is fetched
     setState(() {

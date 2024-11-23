@@ -1,3 +1,6 @@
+// To parse this JSON data, do
+//
+//     final userInfo = userInfoFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -15,26 +18,25 @@ class UserInfo {
     });
 
     factory UserInfo.fromJson(Map<String, dynamic> json) => UserInfo(
-        data: Data.fromJson(json["data"]),
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
         message: json["message"],
     );
 
     Map<String, dynamic> toJson() => {
-        "data": data!.toJson(),
+        "data": data?.toJson(),
         "message": message,
     };
 }
 
 class Data {
-    final int? id;
-    final String? name;
-    final String? avatar;
-    final String? email;
-    final String? phone;
-    final bool? emailVerified;
-    final String? address;
-    final double? lng;
-    final double? lat;
+    int? id;
+    String? name;
+    String? avatar;
+    String? email;
+    String? phone;
+    bool? emailVerified;
+    String? address;
+    AddressLocation? addressLocation;
 
     Data({
         this.id,
@@ -44,8 +46,7 @@ class Data {
         this.phone,
         this.emailVerified,
         this.address,
-        this.lng,
-        this.lat,
+        this.addressLocation,
     });
 
     factory Data.fromJson(Map<String, dynamic> json) => Data(
@@ -56,8 +57,7 @@ class Data {
         phone: json["phone"],
         emailVerified: json["email_verified"],
         address: json["address"],
-        lng: json["lng"].toDouble(),
-        lat: json["lat"].toDouble(),
+        addressLocation: json["address_location"] == null ? null : AddressLocation.fromJson(json["address_location"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -68,7 +68,26 @@ class Data {
         "phone": phone,
         "email_verified": emailVerified,
         "address": address,
-        "lng": lng,
+        "address_location": addressLocation?.toJson(),
+    };
+}
+
+class AddressLocation {
+    double? lat;
+    double? lng;
+
+    AddressLocation({
+        this.lat,
+        this.lng,
+    });
+
+    factory AddressLocation.fromJson(Map<String, dynamic> json) => AddressLocation(
+        lat: json["lat"]?.toDouble(),
+        lng: json["lng"]?.toDouble(),
+    );
+
+    Map<String, dynamic> toJson() => {
         "lat": lat,
+        "lng": lng,
     };
 }

@@ -1,4 +1,5 @@
 import 'package:image_picker/image_picker.dart';
+import 'package:petetco/commons/dto/editprofile_dto';
 import 'package:petetco/commons/dto/userchangepassword_dto.dart';
 import 'package:petetco/commons/models/userinfo_model.dart';
 import 'package:petetco/commons/services/auth_service.dart';
@@ -14,12 +15,21 @@ class UserInfoState extends _$UserInfoState {
     return UserInfo();
   }
 
+  void setUserInfo(UserInfo userInfo) {
+    state = userInfo;
+  }
+
   /// Fetch user info asynchronously and update state
   Future<UserInfo> userInfo() async {
     try {
-      final user = await AuthService().userInfo();
-      state = user; // Update state
-      return user;
+      if (state.data == null) {
+        final user = await AuthService().userInfo();
+        state = user; // Update state
+        return user;
+      } else {
+        final user = state;
+        return user;
+      }
     } catch (e) {
       // Handle any errors and log them if necessary
       return state; // Return the existing state on failure
@@ -54,7 +64,12 @@ class UserInfoState extends _$UserInfoState {
   }
 
   Future<bool> updatePassword(UserChangePasswordDto model) async {
-      var result  = await AuthService().updatePassword(model);
-      return result;
+    var result = await AuthService().updatePassword(model);
+    return result;
+  }
+
+  Future<UserInfo> editProfile(EditProfileDto model) async {
+    var result = await AuthService().editProfile(model);
+    return result;
   }
 }

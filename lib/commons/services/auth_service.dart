@@ -1,5 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
+import 'package:petetco/commons/dto/editprofile_dto';
 import 'package:petetco/commons/dto/userchangepassword_dto.dart';
 import 'package:petetco/commons/models/login_model.dart';
 import 'package:petetco/commons/dto/usercreate_dto.dart';
@@ -123,8 +124,8 @@ class AuthService extends BasicService {
   Future<bool> updatePassword(UserChangePasswordDto model) async {
     var token = await getToken();
     final url = Uri.parse('$baseUrl/profile/update-password');
-    
-     var request = http.MultipartRequest('POST', url)
+
+    var request = http.MultipartRequest('POST', url)
       ..headers['Authorization'] = 'Bearer $token'
       ..headers['Accept'] = 'application/json';
 
@@ -138,6 +139,42 @@ class AuthService extends BasicService {
       return true;
     } else {
       return false;
+    }
+  }
+
+  Future<UserInfo> editProfile(EditProfileDto model) async {
+    var token = await getToken();
+    final url = Uri.parse('$baseUrl/profile');
+
+    Map<String, dynamic> payload = {
+      'name': model.name ?? "N/A",
+      'address_location': model.addressLocation != null
+          ? model.addressLocation!.toJson()
+          : {'lat': 0, 'lng': 0}, 
+      'address': model.address ?? "N/A",
+      'phone': model.phone ?? "N/A",
+    };
+
+    // Convert the payload to JSON
+    String jsonPayload = json.encode(payload);
+
+    // Send the POST request
+    var response = await http.post(
+      url,
+      headers: {
+        'Authorization': 'Bearer $token',
+        'Accept': 'application/json',
+        'Content-Type':
+            'application/json', // Indicate that we're sending JSON data
+      },
+      body: jsonPayload,
+    );
+
+    // Check the response status
+    if (response.statusCode == 200) {
+      return new UserInfo();
+    } else {
+      return new UserInfo();
     }
   }
 }
