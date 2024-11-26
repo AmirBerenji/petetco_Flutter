@@ -56,19 +56,28 @@ class PetProfileScreen extends StatelessWidget {
                                         petId: e.id!,
                                       )));
                         },
-                        child: Container(
+                        child: 
+                        
+                        Container(
                           width: AppLayout.getWidth(170),
                           height: AppLayout.getHeight(150),
                           decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image:
-                                      AssetImage('assets/images/scales2.jpg'),
-                                  fit: BoxFit.cover),
                               borderRadius: BorderRadius.all(
                                   Radius.circular(AppLayout.getHeight(10))),
-                              color: Styles.grey400,
+                              color: Styles.grey200,
                               border: Border.all(color: Styles.grey200)),
+                        child: Column(
+                          children: [
+                            Gap(AppLayout.getHeight(15)),
+                            const Image(image: 
+                                      AssetImage('assets/images/weight.png'),
+                                  fit: BoxFit.cover,width:70,height: 70,),
+                                  Gap(AppLayout.getHeight(15)),
+                                  Text('Weight:${e.weight}',style: Styles.headLineStyleGreen3,)
+                          ],
                         ),
+                        ),
+                     
                       ),
                       Spacer(),
                       GestureDetector(
@@ -80,24 +89,42 @@ class PetProfileScreen extends StatelessWidget {
                                         petId: e.id!,
                                       )));
                         },
-                        child: Container(
+                        child: 
+                         
+                        Container(
                           width: AppLayout.getWidth(170),
                           height: AppLayout.getHeight(150),
                           decoration: BoxDecoration(
-                              image: DecorationImage(
-                                  image: AssetImage('assets/images/meter.jpg'),
-                                  fit: BoxFit.cover),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10)),
-                              color: Styles.grey400,
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(AppLayout.getHeight(10))),
+                              color: Styles.grey200,
                               border: Border.all(color: Styles.grey200)),
+                        child: Column(
+                          children: [
+                            Gap(AppLayout.getHeight(15)),
+                            const Image(image: 
+                                      AssetImage('assets/images/height.png'),
+                                  fit: BoxFit.cover,width:70,height: 70,),
+                                  Gap(AppLayout.getHeight(15)),
+                                  Text('Height:${e.height}',style: Styles.headLineStyleGreen3,)
+                          ],
                         ),
+                        ),
+                     
+                      
                       ),
                     ],
                   ),
                 )
               ],
-            )
+              
+            ),
+            Gap(AppLayout.getHeight(10)),
+                const HeadList(
+                  listText: "Your Task",
+                  isNotShow: true,
+                ),
+                Gap(AppLayout.getHeight(10)),
           ],
         ),
       ),
