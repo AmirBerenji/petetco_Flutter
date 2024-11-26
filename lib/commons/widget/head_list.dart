@@ -17,7 +17,7 @@ class HeadList extends StatelessWidget {
       children: [
         Text(
           listText,
-          style: Styles.headLineStyle2,
+          style: Styles.headLineStyle3,
         ),
         const Spacer(),
         isNotShow ?? true?
