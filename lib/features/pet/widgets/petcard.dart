@@ -58,9 +58,13 @@ class PetCard extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
-                            e.name.toString(),
-                            style: Styles.headLineStyleGreen2,
+                          SizedBox(
+                            width: 180,
+                            child: Text(
+                              e.name.toString(),
+                              overflow: TextOverflow.ellipsis,
+                              style: Styles.headLineStyleGreen2,
+                            ),
                           ),
                           Row(
                             children: [

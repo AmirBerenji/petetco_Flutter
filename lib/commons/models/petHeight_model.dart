@@ -10,20 +10,20 @@ String petHeightToJson(PetHeight data) => json.encode(data.toJson());
 
 class PetHeight {
     final int? id;
-    final String? date;
+    final String? label;
     final int? petId;
     final double? height;
 
     PetHeight({
         this.id,
-        this.date,
+        this.label,
         this.petId,
         this.height,
     });
 
     factory PetHeight.fromJson(Map<String, dynamic> json) => PetHeight(
         id: json["id"],
-        date: json["date"],
+        label: json["label"],
         petId: json["pet_id"],
          height: json["height"] is String
           ? double.parse(json["height"])
@@ -34,7 +34,7 @@ class PetHeight {
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "date": date,
+        "label": label,
         "pet_id": petId,
         "height": height,
     };

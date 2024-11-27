@@ -31,8 +31,6 @@ class _PetAddWeightScreenState extends ConsumerState<PetAddWeightScreen>
   bool isLoading = true;
   List<PetWeight> petweight = [];
 
-  var data = [0.0, 1.0, 1.5, 2.0, 0.0, 0.0, -0.5, -1.0, -0.5, 0.0, 0.0];
-
   @override
   void initState() {
     super.initState();
@@ -161,7 +159,7 @@ class _PetAddWeightScreenState extends ConsumerState<PetAddWeightScreen>
                       .map((e) => Row(
                             children: [
                               Gap(AppLayout.getHeight(20)),
-                              Text("${e.date.toString()}: "),
+                              Text("${e.label.toString()}: "),
                               Gap(AppLayout.getHeight(20)),
                               Text(e.weight.toString())
                             ],

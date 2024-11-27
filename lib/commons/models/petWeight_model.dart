@@ -10,20 +10,20 @@ String petWeightToJson(PetWeight data) => json.encode(data.toJson());
 
 class PetWeight {
     final int? id;
-    final String? date;
+    final String? label;
     final int? petId;
     final double? weight;
 
     PetWeight({
         this.id,
-        this.date,
+        this.label,
         this.petId,
         this.weight,
     });
 
     factory PetWeight.fromJson(Map<String, dynamic> json) => PetWeight(
         id: json["id"],
-        date: json["date"],
+        label: json["label"],
         petId: json["pet_id"],
          weight: json["weight"] is String
           ? double.parse(json["weight"])
@@ -34,7 +34,7 @@ class PetWeight {
 
     Map<String, dynamic> toJson() => {
         "id": id,
-        "date": date,
+        "label": label,
         "pet_id": petId,
         "weight": weight,
     };
