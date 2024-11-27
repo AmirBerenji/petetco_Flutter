@@ -28,7 +28,7 @@ class PetCareCard extends StatelessWidget {
               Gap(10),
               image,
               Gap(10),
-              Text(text,style: Styles.headLineStyleWhite3,)
+              Text(text,style: Styles.headLineStyleGreen3,)
             ],
           ),
         ),

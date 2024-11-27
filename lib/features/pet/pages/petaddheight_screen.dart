@@ -160,7 +160,7 @@ class _PetAddHeightScreenState extends ConsumerState<PetAddHeightScreen> {
                       .map((e) => Row(
                             children: [
                               Gap(AppLayout.getHeight(20)),
-                              Text("${e.date.toString()}: "),
+                              Text("${e.label.toString()}: "),
                               Gap(AppLayout.getHeight(5)),
                               Text(e.height.toString())
                             ],
