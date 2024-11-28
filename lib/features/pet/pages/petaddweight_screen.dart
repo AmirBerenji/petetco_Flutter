@@ -28,6 +28,8 @@ class _PetAddWeightScreenState extends ConsumerState<PetAddWeightScreen>
   final TextEditingController _date = TextEditingController();
   final TextEditingController _weight = TextEditingController();
 
+
+  String selectedFilter = "";
   bool isLoading = true;
   List<PetWeight> petweight = [];
 
@@ -35,6 +37,25 @@ class _PetAddWeightScreenState extends ConsumerState<PetAddWeightScreen>
   void initState() {
     super.initState();
     _checkStatus();
+  }
+
+  Future<void> changeFilter(String kind) async {
+    isLoading = true;
+    Map<String, dynamic> data;
+    if (kind == "") {
+      data = {"pet_id": widget.petId};
+    } else {
+      data = {"pet_id": widget.petId, "type_search": kind};
+    }
+
+    final listPetWeight =
+        await ref.read(petStateProvider.notifier).getAllPetWeight(data);
+    // Update state when data is fetched
+    setState(() {
+      petweight = listPetWeight;
+      selectedFilter = kind;
+      isLoading = false;
+    });
   }
 
   Future<void> _checkStatus() async {
@@ -130,11 +151,95 @@ class _PetAddWeightScreenState extends ConsumerState<PetAddWeightScreen>
                     )),
                 Gap(AppLayout.getHeight(20)),
                 const Divider(),
+                const HeadList(listText: 'Filter'),
+                Gap(5),
+
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Row(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          changeFilter("");
+                        },
+                        child: Container(
+                            width: 100,
+                            height: 30,
+                            decoration: BoxDecoration(
+                                color: selectedFilter == "" ? Styles.green900 : Styles.grey600,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Center(
+                              child: Text(
+                                "Last 10",
+                                style: Styles.headLineStyleWhite3,
+                              ),
+                            )),
+                      ),
+                      Gap(10),
+                      GestureDetector(
+                        onTap: () {
+                          changeFilter("weekly");
+                        },
+                        child: Container(
+                            width: 100,
+                            height: 30,
+                            decoration: BoxDecoration(
+                                color: selectedFilter == "weekly" ? Styles.green900 : Styles.grey600,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Center(
+                              child: Text(
+                                "Weekly",
+                                style: Styles.headLineStyleWhite3,
+                              ),
+                            )),
+                      ),
+                      Gap(10),
+                      GestureDetector(
+                        onTap: () {
+                          changeFilter("monthly");
+                        },
+                        child: Container(
+                            width: 100,
+                            height: 30,
+                            decoration: BoxDecoration(
+                                color: selectedFilter == "monthly" ? Styles.green900 : Styles.grey600,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Center(
+                              child: Text(
+                                "Monthly",
+                                style: Styles.headLineStyleWhite3,
+                              ),
+                            )),
+                      ),
+                      Gap(10),
+                      GestureDetector(
+                        onTap: () {
+                          changeFilter("all");
+                        },
+                        child: Container(
+                            width: 100,
+                            height: 30,
+                            decoration: BoxDecoration(
+                                color:selectedFilter == "all" ? Styles.green900 : Styles.grey600,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: Center(
+                              child: Text(
+                                "All",
+                                style: Styles.headLineStyleWhite3,
+                              ),
+                            )),
+                      ),
+                      Gap(10),
+                    ],
+                  ),
+                ),
+
+                Gap(AppLayout.getHeight(30)),
                 const HeadList(listText: 'Chart'),
                 Gap(AppLayout.getHeight(5)),
                 Center(
                   child: SizedBox(
-                    width: AppLayout.getScreenWidth()*0.8,
+                    width: AppLayout.getScreenWidth() * 0.8,
                     height: 100.0,
                     child: Sparkline(
                       data: petweight.reversed
@@ -142,7 +247,7 @@ class _PetAddWeightScreenState extends ConsumerState<PetAddWeightScreen>
                           .toList(),
                       lineColor: Styles.green900,
                       gridLineColor: Colors.green,
-                      pointColor: Colors.red ,
+                      pointColor: Colors.red,
                       pointsMode: PointsMode.all,
                       pointSize: 8,
                       gridLinesEnable: true,

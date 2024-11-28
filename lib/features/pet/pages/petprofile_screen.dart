@@ -165,13 +165,14 @@ class _PetProfileScreenState extends ConsumerState<PetProfileScreen>{
                 children: listPetCare!.data!
                     .map((petcare) => PetCareCard(
                           image: Image.network(
-                            petcare.cover ?? "assets/images/height.png",
+                           petcare.cover.toString() ,
                             width: 100,
                             height: 100,
                             fit: BoxFit.fill,
                           ),
                           text: petcare.name ?? "",
                         ))
+                        .take(4)
                     .toList(),
               ),
             ),
