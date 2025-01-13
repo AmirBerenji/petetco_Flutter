@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 import 'package:image_picker/image_picker.dart';
-import 'package:petetco/commons/dto/editprofile_dto';
+import 'package:petetco/commons/dto/editprofile_dto.dart';
 import 'package:petetco/commons/dto/userchangepassword_dto.dart';
 import 'package:petetco/commons/models/login_model.dart';
 import 'package:petetco/commons/dto/usercreate_dto.dart';
@@ -150,7 +150,7 @@ class AuthService extends BasicService {
       'name': model.name ?? "N/A",
       'address_location': model.addressLocation != null
           ? model.addressLocation!.toJson()
-          : {'lat': 0, 'lng': 0}, 
+          : {'lat': 0, 'lng': 0},
       'address': model.address ?? "N/A",
       'phone': model.phone ?? "N/A",
     };

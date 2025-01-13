@@ -1,5 +1,5 @@
 import 'package:image_picker/image_picker.dart';
-import 'package:petetco/commons/dto/editprofile_dto';
+import 'package:petetco/commons/dto/editprofile_dto.dart';
 import 'package:petetco/commons/dto/userchangepassword_dto.dart';
 import 'package:petetco/commons/models/userinfo_model.dart';
 import 'package:petetco/commons/services/auth_service.dart';

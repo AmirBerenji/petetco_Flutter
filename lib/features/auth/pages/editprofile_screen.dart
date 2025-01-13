@@ -2,7 +2,7 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:petetco/commons/dto/editprofile_dto';
+import 'package:petetco/commons/dto/editprofile_dto.dart';
 import 'package:petetco/commons/utils/app_layout.dart';
 import 'package:petetco/commons/utils/app_style.dart';
 import 'package:petetco/commons/widget/custom_btn.dart';
@@ -17,7 +17,8 @@ class EditProfileScreen extends ConsumerStatefulWidget {
   ConsumerState<EditProfileScreen> createState() => _EditProfileScreenState();
 }
 
-class _EditProfileScreenState extends ConsumerState<EditProfileScreen>  with TickerProviderStateMixin {
+class _EditProfileScreenState extends ConsumerState<EditProfileScreen>
+    with TickerProviderStateMixin {
   final TextEditingController _name = TextEditingController();
   final TextEditingController _address = TextEditingController();
   final TextEditingController _phone = TextEditingController();
@@ -75,8 +76,9 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen>  with Tic
               CustomButton(
                 onTap: () {
                   if (_name.text.trim().isEmpty) {
-                    CustomAwesomeDialog(
-                        context, "Please fill display name", DialogType.error).show();
+                    CustomAwesomeDialog(context, "Please fill display name",
+                            DialogType.error)
+                        .show();
                     return;
                   }
 
