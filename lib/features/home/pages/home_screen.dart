@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:petetco/commons/dto/vetlist_dto.dart';
 import 'package:petetco/commons/models/petlist_model.dart';
 import 'package:petetco/commons/models/userinfo_model.dart';
 import 'package:petetco/commons/utils/app_layout.dart';
@@ -13,6 +14,9 @@ import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
 import 'package:petetco/features/pet/controllers/pet_provider.dart';
 import 'package:petetco/features/pet/pages/addpet_screen.dart';
 import 'package:petetco/features/pet/widgets/petcard.dart';
+import 'package:petetco/features/vet/controllers/vet_provider.dart';
+import 'package:petetco/features/vet/pages/listvet_screen.dart';
+import 'package:petetco/features/vet/widgets/vetcard.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -26,6 +30,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   UserInfo? userInfo;
   bool isLoading = true; // Track if data is still being fetched
   PetList? petListInfo;
+  VetListDto? vetListInfo;
 
   @override
   void initState() {
@@ -38,6 +43,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     final res = await ref.read(userInfoStateProvider.notifier).userInfo();
     ref.read(userInfoStateProvider.notifier).setUserInfo(res);
     final petList = await ref.read(petStateProvider.notifier).getAllPet();
+    final vetList = await ref.read(vetStateProvider.notifier).getAllVet();
     // Update state when data is fetched
     setState(() {
       userInfo = res;
@@ -48,6 +54,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
         return;
       }
       petListInfo = petList;
+      vetListInfo = vetList;
       isLoading = false;
     });
   }
@@ -110,6 +117,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               const HeadList(
                 listText: "Our offer",
               ),
+
               Gap(AppLayout.getHeight(5)),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
@@ -185,8 +193,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                         height: 100,
                         decoration: const BoxDecoration(
                             image: DecorationImage(
-                              image:  AssetImage("assets/images/addpet.png"),
-                              fit: BoxFit.cover),
+                                image: AssetImage("assets/images/addpet.png"),
+                                fit: BoxFit.cover),
                             borderRadius:
                                 BorderRadius.all(Radius.circular(15))),
                         child: const Padding(
@@ -197,6 +205,30 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                         ),
                       ),
                     ),
+
+              Gap(AppLayout.getHeight(20)),
+
+              //vet part
+              HeadList(
+                listText: "Vet list",
+                isNotShow: false,
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ListVetScreen()));
+                },
+              ),
+              Gap(AppLayout.getHeight(5)),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: vetListInfo!.data!
+                      .take(3)
+                      .map(
+                        (vet) => VetCard(e: vet),
+                      )
+                      .toList(), // Convert the iterable to a list here
+                ),
+              ),
 
               Gap(AppLayout.getHeight(20)),
 
@@ -240,45 +272,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 ),
               ),
               Gap(AppLayout.getHeight(30)),
-              //vet part
-              const HeadList(
-                listText: "Vet list",
-              ),
-              Gap(AppLayout.getHeight(5)),
-              SingleChildScrollView(
-                scrollDirection: Axis.horizontal,
-                child: Row(
-                  children: [
-                    Image.asset(
-                      "assets/images/vet4.jpg",
-                      width: AppLayout.getWidth(300),
-                      height: AppLayout.getHeight(200),
-                      fit: BoxFit.fill,
-                    ),
-                    Gap(AppLayout.getHeight(10)),
-                    Image.asset(
-                      "assets/images/vet2.jpg",
-                      width: AppLayout.getWidth(300),
-                      height: 200,
-                      fit: BoxFit.fill,
-                    ),
-                    Gap(AppLayout.getHeight(10)),
-                    Image.asset(
-                      "assets/images/vet3.jpg",
-                      width: AppLayout.getWidth(300),
-                      height: 200,
-                      fit: BoxFit.fill,
-                    ),
-                    Gap(AppLayout.getHeight(10)),
-                    Image.asset(
-                      "assets/images/vet1.jpg",
-                      width: AppLayout.getWidth(300),
-                      height: 200,
-                      fit: BoxFit.fill,
-                    )
-                  ],
-                ),
-              ),
             ],
           ),
         )

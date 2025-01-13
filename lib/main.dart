@@ -45,7 +45,10 @@ class _MyAppState extends State<MyApp> {
         scaffoldMessengerKey.currentState?.showSnackBar(
           SnackBar(
             backgroundColor: Styles.errorRed,
-            content: Text('No internet connection',style: Styles.headLineStyle2.copyWith(color: Styles.grey100),),
+            content: Text(
+              'No internet connection',
+              style: Styles.headLineStyle2.copyWith(color: Styles.grey100),
+            ),
             duration: const Duration(seconds: 10),
           ),
         );
