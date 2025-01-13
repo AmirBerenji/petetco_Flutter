@@ -229,7 +229,7 @@ class _PetAddWeightScreenState extends ConsumerState<PetAddWeightScreen>
                               ),
                             )),
                       ),
-                      Gap(10),
+                      const Gap(10),
                     ],
                   ),
                 ),
