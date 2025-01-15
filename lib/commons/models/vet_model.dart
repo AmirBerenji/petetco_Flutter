@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:petetco/commons/models/branch_model.dart';
+
 Vet vetFromJson(String str) => Vet.fromJson(json.decode(str));
 
 String vetToJson(Vet data) => json.encode(data.toJson());
@@ -9,7 +11,7 @@ class Vet {
   final dynamic cover;
   final String? name;
   final String? description;
-  final List<dynamic>? branches;
+  final List<Branch>? branches;
   final String? createdAt;
 
   Vet({
@@ -28,7 +30,7 @@ class Vet {
         description: json["description"],
         branches: json["branches"] == null
             ? []
-            : List<dynamic>.from(json["branches"]!.map((x) => x)),
+            : List<Branch>.from(json["branches"]!.map((x) => x)),
         createdAt: json["created_at"],
       );
 
@@ -38,7 +40,7 @@ class Vet {
         "name": name,
         "description": description,
         "branches":
-            branches == null ? [] : List<dynamic>.from(branches!.map((x) => x)),
+            branches == null ? [] : List<Branch>.from(branches!.map((x) => x)),
         "created_at": createdAt,
       };
 }

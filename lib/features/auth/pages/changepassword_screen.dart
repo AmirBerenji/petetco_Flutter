@@ -2,7 +2,6 @@ import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
-import 'package:http/http.dart';
 import 'package:lottie/lottie.dart';
 import 'package:petetco/commons/dto/userchangepassword_dto.dart';
 import 'package:petetco/commons/utils/app_layout.dart';
@@ -144,7 +143,9 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
                           textInputAction: TextInputAction.done),
                       const Gap(20),
                       CustomButton(
-                          onTap: () async {await updatePassword();},
+                          onTap: () async {
+                            await updatePassword();
+                          },
                           width: 380,
                           height: 50,
                           borderColor: Styles.green900,

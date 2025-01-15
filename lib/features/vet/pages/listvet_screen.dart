@@ -65,7 +65,7 @@ class _ListVetScreenState extends ConsumerState<ListVetScreen> {
                   child: ListView(
                     children: vetlistInfo!.data!
                         .map((vet) => VetCard(
-                            e: vet,
+                            vet: vet,
                             cardWidth: 400,
                             padding: const EdgeInsets.only(bottom: 15)))
                         .toList(),

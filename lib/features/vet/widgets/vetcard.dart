@@ -6,12 +6,12 @@ import 'package:petetco/features/vet/pages/vetprofile_screen.dart';
 class VetCard extends StatelessWidget {
   const VetCard({
     super.key,
-    required this.e,
+    required this.vet,
     required this.cardWidth,
     required this.padding,
   });
 
-  final Vet e;
+  final Vet vet;
   final double cardWidth;
   final EdgeInsets padding;
 
@@ -19,8 +19,10 @@ class VetCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Navigator.push(context,
-            MaterialPageRoute(builder: (context) => VetProfileScreen(e: e)));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => VetProfileScreen(vet: vet)));
       },
       child: Padding(
         padding: padding,
@@ -35,7 +37,7 @@ class VetCard extends StatelessWidget {
           child: ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(15)),
             child: Image.network(
-              e.cover ??
+              vet.cover ??
                   "https://i.pinimg.com/736x/af/93/6b/af936bfab6e158877aea33e8bba5b589.jpg",
               width: 300,
               height: 200,
