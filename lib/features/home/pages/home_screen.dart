@@ -228,7 +228,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       .take(3)
                       .map(
                         (vet) => VetCard(
-                          e: vet,
+                          vet: vet,
                           cardWidth: 300,
                           padding: const EdgeInsets.all(8.0),
                         ),
