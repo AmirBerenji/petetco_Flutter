@@ -7,9 +7,13 @@ class VetCard extends StatelessWidget {
   const VetCard({
     super.key,
     required this.e,
+    required this.cardWidth,
+    required this.padding,
   });
 
   final Vet e;
+  final double cardWidth;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +23,10 @@ class VetCard extends StatelessWidget {
             MaterialPageRoute(builder: (context) => VetProfileScreen(e: e)));
       },
       child: Padding(
-        padding: const EdgeInsets.all(8),
+        padding: padding,
         child: Container(
-          width: 300,
-          height: 150,
+          width: cardWidth,
+          height: 200,
           decoration: BoxDecoration(
             color: Styles.grey500,
             borderRadius: const BorderRadius.all(Radius.circular(15)),
@@ -31,7 +35,8 @@ class VetCard extends StatelessWidget {
           child: ClipRRect(
             borderRadius: const BorderRadius.all(Radius.circular(15)),
             child: Image.network(
-              e.cover,
+              e.cover ??
+                  "https://i.pinimg.com/736x/af/93/6b/af936bfab6e158877aea33e8bba5b589.jpg",
               width: 300,
               height: 200,
               fit: BoxFit.fill,

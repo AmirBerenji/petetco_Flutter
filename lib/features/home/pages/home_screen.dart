@@ -10,6 +10,7 @@ import 'package:petetco/commons/widget/loading_dialog.dart';
 import 'package:petetco/features/auth/controllers/userinfo_provider.dart';
 import 'package:petetco/features/bottom_bar.dart';
 import 'package:petetco/commons/widget/head_list.dart';
+import 'package:petetco/features/branch/pages/listbranch_screen.dart';
 import 'package:petetco/features/onboarding/pages/onboarding_screen.dart';
 import 'package:petetco/features/pet/controllers/pet_provider.dart';
 import 'package:petetco/features/pet/pages/addpet_screen.dart';
@@ -213,8 +214,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 listText: "Vet list",
                 isNotShow: false,
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => ListVetScreen()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ListBranchScreen()));
                 },
               ),
               Gap(AppLayout.getHeight(5)),
@@ -224,7 +227,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   children: vetListInfo!.data!
                       .take(3)
                       .map(
-                        (vet) => VetCard(e: vet),
+                        (vet) => VetCard(
+                          e: vet,
+                          cardWidth: 300,
+                          padding: const EdgeInsets.all(8.0),
+                        ),
                       )
                       .toList(), // Convert the iterable to a list here
                 ),
