@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:petetco/commons/dto/branch_dto.dart';
 import 'package:petetco/commons/dto/branchlist_dto.dart';
 import 'package:petetco/commons/helper/public_method.dart';
 import 'package:petetco/commons/services/basic_service.dart';
@@ -26,6 +27,27 @@ class BranchService extends BasicService {
       var errorMessage = jsonDecode(response.body);
       //branchList.message = errorMessage["message"];
       return branchList;
+    }
+  }
+
+  Future<BranchDto> getBranch(int id) async {
+    var token = await getToken();
+
+    final url = Uri.parse('$baseUrl/branches/$id');
+
+    final response = await http.get(url, headers: <String, String>{
+      'Authorization': 'Bearer $token',
+    });
+
+    var branch = BranchDto();
+
+    if (response.statusCode == 200) {
+      branch = branchDtoFromJson(response.body);
+      return branch;
+    } else {
+      var errorMessage = jsonDecode(response.body);
+      //branchList.message = errorMessage["message"];
+      return branch;
     }
   }
 }
