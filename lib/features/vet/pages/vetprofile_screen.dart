@@ -1,31 +1,68 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
+import 'package:petetco/commons/dto/vet_dto.dart';
 import 'package:petetco/commons/models/vet_model.dart';
+import 'package:petetco/commons/utils/app_layout.dart';
 import 'package:petetco/commons/utils/app_style.dart';
+import 'package:petetco/commons/widget/loading_dialog.dart';
+import 'package:petetco/features/branch/widgets/branchcard.dart';
+import 'package:petetco/features/vet/controllers/vet_provider.dart';
 
-class VetProfileScreen extends StatefulWidget {
+class VetProfileScreen extends ConsumerStatefulWidget {
   const VetProfileScreen({super.key, required this.vet});
 
   final Vet vet;
 
   @override
-  State<VetProfileScreen> createState() => _VetProfileScreenState();
+  ConsumerState<VetProfileScreen> createState() => _VetProfileScreenState();
 }
 
-class _VetProfileScreenState extends State<VetProfileScreen> {
+class _VetProfileScreenState extends ConsumerState<VetProfileScreen> {
+  bool isLoading = true;
+  VetDto? vetProfileInfo;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkStatus();
+  }
+
+  Future<void> _checkStatus() async {
+    try {
+      final vetProfile =
+          await ref.read(vetStateProvider.notifier).getVet(widget.vet.id!);
+      setState(() {
+        vetProfileInfo = vetProfile;
+        isLoading = false;
+      });
+    } catch (error) {
+      setState(() {
+        isLoading = false;
+      });
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to load vet: $error')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    AppLayout.getSize(context);
+    if (isLoading) {
+      return const LoadingDialog();
+    }
+
     return Scaffold(
       body: Stack(
         children: [
-          // Background Image
           Image.network(
-            widget.vet.cover,
+            widget.vet.cover ??
+                "https://i.pinimg.com/736x/af/93/6b/af936bfab6e158877aea33e8bba5b589.jpg",
             width: double.infinity,
             height: 280,
             fit: BoxFit.cover,
           ),
-          // Transparent AppBar
           AppBar(
             backgroundColor: Colors.transparent,
             elevation: 0,
@@ -36,7 +73,6 @@ class _VetProfileScreenState extends State<VetProfileScreen> {
               },
             ),
           ),
-          // Content Section
           Padding(
             padding:
                 const EdgeInsets.only(top: 230), // Avoid overlapping AppBar
@@ -56,19 +92,19 @@ class _VetProfileScreenState extends State<VetProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          widget.vet.name.toString(),
+                          vetProfileInfo!.data!.name.toString(),
                           style: Styles.headLineStyleGreen2,
                         ),
                         const Gap(10),
                         Text(
-                          widget.vet.description.toString(),
+                          vetProfileInfo!.data!.description!.toString(),
                           style: Styles.headLineStyle4,
                         ),
                         const Gap(10),
                         const Divider(),
                         Column(
-                          children: widget.vet.branches!
-                              .map((b) => Text(b.name!.toString()))
+                          children: vetProfileInfo!.data!.branches!
+                              .map((b) => BranchCard(branch: b))
                               .toList(),
                         )
                       ],

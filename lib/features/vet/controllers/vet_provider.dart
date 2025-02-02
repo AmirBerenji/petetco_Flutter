@@ -1,3 +1,4 @@
+import 'package:petetco/commons/dto/vet_dto.dart';
 import 'package:petetco/commons/dto/vetlist_dto.dart';
 import 'package:petetco/commons/services/vet_service.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
@@ -14,5 +15,10 @@ class VetState extends _$VetState {
     var vetList = await VetService().getAllVet();
     state = vetList;
     return vetList;
+  }
+
+  Future<VetDto> getVet(int id) async {
+    var vetDto = await VetService().getVet(id);
+    return vetDto;
   }
 }

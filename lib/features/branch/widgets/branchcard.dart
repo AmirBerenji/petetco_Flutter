@@ -14,7 +14,7 @@ class BranchCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 140,
+      width: double.infinity,
       margin: const EdgeInsets.all(10),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
@@ -24,12 +24,17 @@ class BranchCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            branch.vet?.name ?? 'Unknown Vet',
-            style: Styles.headLineStyleGreen2,
-          ),
+          if (branch.vet?.name != null) // Corrected conditional syntax
+            Text(
+              branch.vet?.name ?? 'Unknown Vet',
+              style: Styles.headLineStyleGreen2,
+            ),
           const Gap(5),
           Text(branch.name ?? 'Unknown Name', style: Styles.headLineStyle3),
+          const Gap(5),
+          Text(branch.phone ?? 'Unknown Address', style: Styles.headLineStyle4),
+          const Gap(5),
+          Text(branch.email ?? 'Unknown Address', style: Styles.headLineStyle4),
           const Gap(5),
           Text(branch.address ?? 'Unknown Address',
               style: Styles.headLineStyle4),
