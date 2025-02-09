@@ -38,6 +38,13 @@ class BranchCard extends StatelessWidget {
           const Gap(5),
           Text(branch.address ?? 'Unknown Address',
               style: Styles.headLineStyle4),
+          Gap(3),
+          Divider(
+            height: 1,
+            color: Styles.green900,
+          ),
+          Gap(3),
+          (Text("data"))
         ],
       ),
     );

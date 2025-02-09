@@ -5,10 +5,11 @@ class HeadList extends StatelessWidget {
   const HeadList({
     super.key,
     required this.listText,
-    this.onTap, this.isNotShow,
+    this.onTap,
+    this.isNotShow,
   });
   final String listText;
-  final bool?  isNotShow;  
+  final bool? isNotShow;
   final void Function()? onTap;
 
   @override
@@ -17,19 +18,18 @@ class HeadList extends StatelessWidget {
       children: [
         Text(
           listText,
-          style: Styles.headLineStyle3,
+          style: Styles.headLineStyle3.copyWith(fontSize: 14),
         ),
         const Spacer(),
-        isNotShow ?? true?
-        const Text("")
-        :
-        GestureDetector(
-          onTap: onTap ,
-          child: Text(
-            "View all",
-            style: Styles.headLineStyleGreen4,
-          ),
-        )
+        isNotShow ?? true
+            ? const Text("")
+            : GestureDetector(
+                onTap: onTap,
+                child: Text(
+                  "View all",
+                  style: Styles.headLineStyleGreen4,
+                ),
+              )
       ],
     );
   }

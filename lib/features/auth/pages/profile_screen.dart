@@ -24,21 +24,33 @@ class ProfileScreen extends ConsumerStatefulWidget {
   ConsumerState<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends ConsumerState<ProfileScreen>  with TickerProviderStateMixin{
+class _ProfileScreenState extends ConsumerState<ProfileScreen>
+    with TickerProviderStateMixin {
   final ImagePicker _picker = ImagePicker();
   UserInfo? userInfo;
   bool isLoading = true;
   XFile? imageSource;
 
   Future<void> setPicPath(ImageSource imgSource) async {
-    final XFile? pickedFile = await _picker.pickImage(source: imgSource);
-    if (pickedFile != null) {
-      setState(() {
-        imageSource = pickedFile;
-      });
-      await ref.read(userInfoStateProvider.notifier).updateAvatar(pickedFile);
+    try {
+      final XFile? pickedFile = await _picker.pickImage(source: imgSource);
+
+      if (pickedFile != null) {
+        if (!mounted) return; // Prevent calling setState if widget is disposed
+        setState(() {
+          imageSource = pickedFile;
+        });
+
+        await ref.read(userInfoStateProvider.notifier).updateAvatar(pickedFile);
+      }
+
+      if (mounted) {
+        Navigator.of(context).pop(); // Close dialog or screen safely
+      }
+    } catch (e, stackTrace) {
+      debugPrint("Error picking image: $e");
+      debugPrint("Stack Trace: $stackTrace");
     }
-    Navigator.of(context).pop();
   }
 
   @override
