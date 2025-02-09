@@ -17,13 +17,13 @@ class PetCard extends StatelessWidget {
   final Pet e;
   final double cardWidth;
   final EdgeInsets padding;
-  final bool? isNotClick ;
+  final bool? isNotClick;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (isNotClick == false ) {
+        if (isNotClick == false) {
           Navigator.push(context,
               MaterialPageRoute(builder: (context) => PetProfileScreen(e: e)));
         }
@@ -33,9 +33,9 @@ class PetCard extends StatelessWidget {
         child: Container(
           width: cardWidth,
           decoration: BoxDecoration(
-              color: Styles.bgPetBox,
+              color: Colors.white38,
               borderRadius: const BorderRadius.all(Radius.circular(15)),
-              border: Border.all(width: 1, color: Styles.bgColor)),
+              border: Border.all(width: 1, color: Styles.grey400)),
           child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Column(
@@ -84,9 +84,7 @@ class PetCard extends StatelessWidget {
                               const Gap(10),
                               Text(
                                 e.breed!.name!.length >= 15
-                                    ? "${e.breed!.name
-                                            .toString()
-                                            .substring(0, 15)}..."
+                                    ? "${e.breed!.name.toString().substring(0, 15)}..."
                                     : e.breed!.name.toString(),
                                 style: Styles.headLineStyleGreen3,
                               ),

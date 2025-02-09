@@ -86,7 +86,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                       Text(
                         "Welcome back!",
                         style: Styles.headLineStyle3
-                            .copyWith(color: Styles.grey600),
+                            .copyWith(color: Styles.grey500),
                       ),
                       Gap(AppLayout.getHeight(5)),
                       Text(
@@ -119,37 +119,49 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 listText: "Our offer",
               ),
 
-              Gap(AppLayout.getHeight(5)),
+              Gap(AppLayout.getHeight(3)),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    Image.asset(
-                      "assets/images/offer3.jpg",
-                      width: 300,
-                      height: 200,
-                      fit: BoxFit.fill,
+                    ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                      child: Image.asset(
+                        "assets/images/offer3.jpg",
+                        width: 350,
+                        height: 180,
+                        fit: BoxFit.fitWidth,
+                      ),
                     ),
                     Gap(AppLayout.getHeight(10)),
-                    Image.asset(
-                      "assets/images/offer2.jpg",
-                      width: 300,
-                      height: 200,
-                      fit: BoxFit.fill,
+                    ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                      child: Image.asset(
+                        "assets/images/offer2.jpg",
+                        width: 350,
+                        height: 180,
+                        fit: BoxFit.fitWidth,
+                      ),
                     ),
                     Gap(AppLayout.getHeight(10)),
-                    Image.asset(
-                      "assets/images/offer1.jpg",
-                      width: 300,
-                      height: 200,
-                      fit: BoxFit.fill,
+                    ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                      child: Image.asset(
+                        "assets/images/offer1.jpg",
+                        width: 350,
+                        height: 180,
+                        fit: BoxFit.fitWidth,
+                      ),
                     ),
                     Gap(AppLayout.getHeight(10)),
-                    Image.asset(
-                      "assets/images/offer4.jpg",
-                      width: 300,
-                      height: 200,
-                      fit: BoxFit.fill,
+                    ClipRRect(
+                      borderRadius: const BorderRadius.all(Radius.circular(15)),
+                      child: Image.asset(
+                        "assets/images/offer4.jpg",
+                        width: 350,
+                        height: 180,
+                        fit: BoxFit.fitWidth,
+                      ),
                     )
                   ],
                 ),
@@ -166,7 +178,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   BottomBar.mainPageKey.currentState?.navigateTo(1);
                 },
               ),
-              Gap(AppLayout.getHeight(5)),
+              Gap(AppLayout.getHeight(3)),
               petListInfo?.data?.isNotEmpty ?? false
                   ? SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
@@ -220,7 +232,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           builder: (context) => ListBranchScreen()));
                 },
               ),
-              Gap(AppLayout.getHeight(5)),
+              Gap(AppLayout.getHeight(3)),
               SingleChildScrollView(
                 scrollDirection: Axis.horizontal,
                 child: Row(
