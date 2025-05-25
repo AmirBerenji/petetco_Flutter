@@ -1,12 +1,33 @@
+// To parse this JSON data, do
+//
+//     final branchDto = branchDtoFromJson(jsonString);
+
 import 'dart:convert';
 
-import 'package:petetco/commons/models/vet_model.dart';
+import '../models/employee_model.dart';
+import '../models/vet_model.dart';
 
 BranchDto branchDtoFromJson(String str) => BranchDto.fromJson(json.decode(str));
 
 String branchDtoToJson(BranchDto data) => json.encode(data.toJson());
 
 class BranchDto {
+  final Data? data;
+
+  BranchDto({
+    this.data,
+  });
+
+  factory BranchDto.fromJson(Map<String, dynamic> json) => BranchDto(
+        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "data": data?.toJson(),
+      };
+}
+
+class Data {
   final int? id;
   final dynamic cover;
   final int? vetId;
@@ -16,9 +37,10 @@ class BranchDto {
   final String? email;
   final dynamic description;
   final Vet? vet;
+  final List<Employee>? employees;
   final String? createdAt;
 
-  BranchDto({
+  Data({
     this.id,
     this.cover,
     this.vetId,
@@ -28,10 +50,11 @@ class BranchDto {
     this.email,
     this.description,
     this.vet,
+    this.employees,
     this.createdAt,
   });
 
-  factory BranchDto.fromJson(Map<String, dynamic> json) => BranchDto(
+  factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["id"],
         cover: json["cover"],
         vetId: json["vet_id"],
@@ -41,6 +64,10 @@ class BranchDto {
         email: json["email"],
         description: json["description"],
         vet: json["vet"] == null ? null : Vet.fromJson(json["vet"]),
+        employees: json["employees"] == null
+            ? []
+            : List<Employee>.from(
+                json["employees"]!.map((x) => Employee.fromJson(x))),
         createdAt: json["created_at"],
       );
 
@@ -54,6 +81,9 @@ class BranchDto {
         "email": email,
         "description": description,
         "vet": vet?.toJson(),
+        "employees": employees == null
+            ? []
+            : List<dynamic>.from(employees!.map((x) => x.toJson())),
         "created_at": createdAt,
       };
 }

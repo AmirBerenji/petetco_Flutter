@@ -23,7 +23,7 @@ class _SplashScreenState extends ConsumerState<SplashScreen>
     super.initState();
     //SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
     SharedStorage storage = SharedStorage();
-    Future.delayed(const Duration(seconds: 3), () async {
+    Future.delayed(const Duration(seconds: 1), () async {
       var token = await storage.getValue('token');
 
       if (token == null) {

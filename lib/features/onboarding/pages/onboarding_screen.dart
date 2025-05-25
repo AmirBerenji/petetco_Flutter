@@ -19,78 +19,82 @@ class OnBoardingScreen extends StatefulWidget {
 class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController pageController = PageController();
   @override
-  void dispose()
-  {
+  void dispose() {
     pageController.dispose();
     super.dispose();
   }
+
   Widget build(BuildContext context) {
     AppLayout.getSize(context);
-    return  Scaffold(
-      body:Stack(
-        children: [
-          PageView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            controller: pageController,
-            children: const [
-              PageOne(),
-              PageTwo(),
-              PageThree()
-            ],),
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: AppLayout.getHeight(20),vertical: AppLayout.getWidth(30) ),
-                child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Row(
-                    children: [
-                      GestureDetector(
-                        onTap: (){
-                          pageController.nextPage(duration: const Duration(milliseconds: 600), 
-                          curve: Curves.ease);
-                        },
-                        child: Icon(Ionicons.chevron_forward_circle,
+    return Scaffold(
+        body: Stack(
+      children: [
+        PageView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          controller: pageController,
+          children: const [PageOne(), PageTwo(), PageThree()],
+        ),
+        Align(
+          alignment: Alignment.bottomCenter,
+          child: Padding(
+            padding: EdgeInsets.symmetric(
+                horizontal: AppLayout.getHeight(20),
+                vertical: AppLayout.getWidth(60)),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    GestureDetector(
+                      onTap: () {
+                        pageController.nextPage(
+                            duration: const Duration(milliseconds: 600),
+                            curve: Curves.ease);
+                      },
+                      child: Icon(
+                        Ionicons.chevron_forward_circle,
                         size: 30,
-                        color: Styles.orangeButton,),
+                        color: Styles.orangeButton,
                       ),
-                      Gap(AppLayout.getHeight(10)),
-                      GestureDetector(
-                        onTap: (){
-                          Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
-                        },
-                        child: Text(
+                    ),
+                    Gap(AppLayout.getHeight(10)),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const LoginScreen()));
+                      },
+                      child: Text(
                         "Skip",
-                        style: Styles.headLineStyle3.copyWith(color: Styles.grey100),
-                          ),
+                        style: Styles.headLineStyle3
+                            .copyWith(color: Styles.grey100),
                       ),
-                      
-                    ],
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: () {
+                    pageController.nextPage(
+                        duration: const Duration(microseconds: 600),
+                        curve: Curves.ease);
+                  },
+                  child: SmoothPageIndicator(
+                    controller: pageController,
+                    count: 3,
+                    effect: WormEffect(
+                      activeDotColor: Styles.orangeButton,
+                      dotHeight: 15,
+                      dotWidth: 15,
+                      spacing: 10,
+                    ),
                   ),
-                  GestureDetector(
-                    onTap: (){
-                      pageController.nextPage(duration: const Duration(microseconds: 600), 
-                          curve: Curves.ease);
-                    },
-                    child: SmoothPageIndicator(
-
-                      controller: pageController, 
-                      count: 3,
-                      effect: WormEffect(
-                        activeDotColor: Styles.orangeButton,
-                        dotHeight: 15,
-                        dotWidth: 15,
-                        spacing: 10,
-                      ),
-                      ),
-                  )
-                ],
-              ),
-              ),
+                )
+              ],
+            ),
           ),
-        ],
-      )
-    );
+        ),
+      ],
+    ));
   }
 }

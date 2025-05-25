@@ -115,6 +115,7 @@ class _LoginScreen extends ConsumerState<LoginScreen> {
                           height: 50,
                           borderColor: Styles.green900,
                           color: Styles.green900,
+                          isDrabble: true,
                           text: Text(
                             "Login",
                             style: Styles.headLineStyle2

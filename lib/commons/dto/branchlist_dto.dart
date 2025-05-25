@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final branchListDto = branchListDtoFromJson(jsonString);
+
 import 'dart:convert';
 
 import 'package:petetco/commons/models/branch_model.dart';
@@ -10,12 +14,10 @@ String branchListDtoToJson(BranchListDto data) => json.encode(data.toJson());
 class BranchListDto {
   final List<Branch>? data;
   final Pagination? pagination;
-  final String? message;
 
   BranchListDto({
     this.data,
     this.pagination,
-    this.message,
   });
 
   factory BranchListDto.fromJson(Map<String, dynamic> json) => BranchListDto(
@@ -25,7 +27,6 @@ class BranchListDto {
         pagination: json["pagination"] == null
             ? null
             : Pagination.fromJson(json["pagination"]),
-        message: json["message"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -33,7 +34,6 @@ class BranchListDto {
             ? []
             : List<dynamic>.from(data!.map((x) => x.toJson())),
         "pagination": pagination?.toJson(),
-        "message": message,
       };
 }
 

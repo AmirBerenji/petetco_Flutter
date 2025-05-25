@@ -152,6 +152,7 @@ class _RegisterScreen extends ConsumerState<RegisterScreen> {
                           height: 50,
                           borderColor: Styles.green900,
                           color: Styles.green900,
+                          isDrabble: true,
                           text: Text(
                             "Register",
                             style: Styles.headLineStyle2
