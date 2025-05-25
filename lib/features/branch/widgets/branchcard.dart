@@ -38,13 +38,36 @@ class BranchCard extends StatelessWidget {
           const Gap(5),
           Text(branch.address ?? 'Unknown Address',
               style: Styles.headLineStyle4),
-          Gap(3),
+          const Gap(3),
           Divider(
             height: 1,
             color: Styles.green900,
           ),
-          Gap(3),
-          (Text("data"))
+          const Gap(3),
+          Column(
+            children: branch.services!.isNotEmpty
+                ? branch.services!
+                    .map((service) => Text(service.name!.toString()))
+                    .toList()
+                : [
+                    Text(
+                      "No service available",
+                      style: Styles.headLineStyle4,
+                    )
+                  ], // Placeholder when empty
+          ),
+          Column(
+            children: branch.employees!.isNotEmpty
+                ? branch.employees!
+                    .map((employee) => Text(employee.name!.toString()))
+                    .toList()
+                : [
+                    Text(
+                      "No employees available",
+                      style: Styles.headLineStyle4,
+                    )
+                  ], // Placeholder when empty
+          ),
         ],
       ),
     );

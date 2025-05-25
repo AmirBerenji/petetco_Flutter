@@ -1,5 +1,11 @@
+// To parse this JSON data, do
+//
+//     final branch = branchFromJson(jsonString);
+
 import 'dart:convert';
 
+import 'package:petetco/commons/models/employee_model.dart';
+import 'package:petetco/commons/models/service_model.dart';
 import 'package:petetco/commons/models/vet_model.dart';
 
 Branch branchFromJson(String str) => Branch.fromJson(json.decode(str));
@@ -16,6 +22,8 @@ class Branch {
   final String? email;
   final dynamic description;
   final Vet? vet;
+  final List<Employee>? employees;
+  final List<Service>? services;
   final String? createdAt;
 
   Branch({
@@ -28,6 +36,8 @@ class Branch {
     this.email,
     this.description,
     this.vet,
+    this.employees,
+    this.services,
     this.createdAt,
   });
 
@@ -41,6 +51,14 @@ class Branch {
         email: json["email"],
         description: json["description"],
         vet: json["vet"] == null ? null : Vet.fromJson(json["vet"]),
+        employees: json["employees"] == null
+            ? []
+            : List<Employee>.from(
+                json["employees"]!.map((x) => Employee.fromJson(x))),
+        services: json["services"] == null
+            ? []
+            : List<Service>.from(
+                json["services"]!.map((x) => Service.fromJson(x))),
         createdAt: json["created_at"],
       );
 
@@ -54,6 +72,12 @@ class Branch {
         "email": email,
         "description": description,
         "vet": vet?.toJson(),
+        "employees": employees == null
+            ? []
+            : List<dynamic>.from(employees!.map((x) => x.toJson())),
+        "services": services == null
+            ? []
+            : List<dynamic>.from(services!.map((x) => x.toJson())),
         "created_at": createdAt,
       };
 }

@@ -47,6 +47,7 @@ class _ListBranchScreenState extends ConsumerState<ListBranchScreen> {
       final branchList =
           await ref.read(branchStateProvider.notifier).getAllBranch(data);
 
+      print(branchList);
       setState(() {
         _branchListInfo = branchList;
         _branches.addAll(branchList.data!);
